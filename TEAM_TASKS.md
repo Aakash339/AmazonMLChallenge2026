@@ -6,9 +6,9 @@ Do not declare a final best model before validation.
 
 - Stages 1–3: complete.
 - Stage 4: complete and frozen.
-- Stage 5: incomplete; the initial scorer and Submission #1 exist.
+- Stage 5: separate combined Submission #2 candidate generated and validator-passing; portal result pending.
 - Submission #1: fast direct indexed exact/strong-match baseline; leaderboard F0.5=0.228. This is not the Stage 5 scorer's score.
-- Immediate objective: evaluate Submission #1 and produce a validated Submission #2.
+- Immediate objective: review the combined .75 package against preserved .40/.80 alternatives; record a portal score only if submitted.
 
 ## Frozen Stage 4 reference
 
@@ -27,7 +27,7 @@ The frozen expansion requires same-country address token df 2,501–25,000 AND s
 
 Initial held-out scorer baseline: F0.5=0.5483, precision=0.9030, recall=0.2510, threshold=12.0. Of 482 true links, 17 were not generated as candidates, 465 were scored, 121 scored ≥12, and 344 scored below 12. The full frozen test candidate volume is estimated at ~12.67B pairs and cannot feasibly be materialized. Submission #1 instead used fast indexed exact/strong rules and scored F0.5=0.228 on the leaderboard.
 
-## Workstream 1 — Submission #1 diagnosis (Priority 1)
+## Workstream 1 — Submission #1 diagnosis (completed 2026-09-27)
 
 Reproduce the exact Submission #1 algorithm on held-out training data. Do not change its implementation initially. Measure candidate recall, precision, F0.5, zero-match behavior, singleton behavior, and multi-match behavior. Compare validation behavior with the 0.228 leaderboard result. Diagnose false positives/negatives, multilingual failures, missing-address failures, and ambiguous exact-name/address failures. Record split, seed, rules, parameters, runtime, and limitations in a new experiment directory. Preserve Submission #1 artifacts. **Owner:** teammate to be assigned.
 
@@ -43,7 +43,7 @@ Build a fast scorer over retrieved pairs. Investigate normalized exact name/addr
 
 Investigate Latin-to-Indian-script names, missing target addresses, name order, and typo-like names. Do not use external data/API lookup. Validate any normalization or transliteration change experimentally.
 
-## Workstream 5 — Integration and Submission #2 (Priority 5)
+## Workstream 5 — Integration and Submission #2 (combined candidate complete; portal result pending)
 
 **Owner:** project lead. Integrate validated improvements, run the official validator, verify candidate-pair consistency, produce outputs, maintain submission count, record leaderboard results, and preserve exact experiment configuration. Submit only after evaluation and output validation.
 

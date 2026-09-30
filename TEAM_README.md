@@ -10,10 +10,10 @@ Business Entity Resolution: for every Source 1 business, identify zero or more c
 - Stage 2: COMPLETE
 - Stage 3: COMPLETE
 - Stage 4: COMPLETE / FROZEN
-- Stage 5: INCOMPLETE
+- Stage 5: Submission #2 candidate generated and validated; portal result pending.
 - Submission #1: completed; leaderboard F0.5 = **0.228**
 
-The 0.228 score came from the fast Submission #1 direct-match baseline, not the full frozen Stage 4 + Stage 5 scorer. The local output passed the supplied validator. Stage 5 still needs held-out reproduction and diagnosis before Submission #2.
+The 0.228 score came from the fast Submission #1 direct-match baseline, not the full frozen Stage 4 + Stage 5 scorer. The separate combined candidate adds an exact-address/name-similarity ≥0.75 rule to the confirmed exact-name/address-token containment ≥0.40 rule. It scored macro F0.5 0.47047 and 0.47395 on two disjoint 10,000-entity training holdouts; the .40-only rule scored 0.41088 and 0.41113 on the same samples. Test outputs and package are under `experiments/stage5_submission2_combined075/`; the supplied validator passed with target-ID checks. These are offline scores; no Submission #2 leaderboard score is available, and 0.80 has not been reached.
 
 ## Dataset setup
 
@@ -79,13 +79,11 @@ The fast direct indexed exact/strong matching baseline processed 1,732,544 S1 ro
 
 The supplied validator passed. The leaderboard score was F0.5=0.228. This is the first real leaderboard baseline, not the final approach. Its compact `candidate_pairs.tsv` is an accepted-ID representation for this submission and is not the complete frozen Stage 4 blocker set. See `experiments/stage5/submission1_fast_baseline/` for code, rules, benchmark, and results.
 
-## Immediate next task: Submission #2
+## Immediate next task: review the separate Submission #2 candidates
 
-1. Reproduce the exact Submission #1 rules on held-out training data.
-2. Measure F0.5, precision, recall, false positives, and false negatives.
-3. Diagnose multilingual failures, missing-address failures, and ambiguous exact-name/address cases.
-4. Develop computationally feasible higher-recall retrieval and scoring.
-5. Validate Submission #2, then submit it to the leaderboard.
+1. Review `experiments/stage5_submission2_combined075/Amazon_ML_Challenge_2026_submission2_combined075.zip` and its held-out evidence alongside the preserved .40 and .80 packages.
+2. If submitting, record the resulting portal score separately; offline scores are not leaderboard scores.
+3. Preserve Submission #1 and all historical experiments. Stage 4 remains frozen.
 
 Never score the 12.6B candidate set or materialize hundreds of GB. Do not modify `student_resource/`, use external data/APIs, install unnecessary packages, delete historical experiments, or declare a best model before validation.
 

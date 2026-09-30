@@ -1,0 +1,899 @@
+{
+  "title": "Submission #1 held-out reproduction and controlled rule experiments",
+  "sample": {
+    "split_seed": 20260927,
+    "sample_seed": 20260928,
+    "holdout_definition": "SHA256(split_seed + NUL + S1 ID) integer mod 5 == 0; this bucket is disjoint from other hash buckets",
+    "sample_method": "population-proportional stratified bottom-k by match class x country within holdout pool",
+    "sample_size": 10000,
+    "holdout_population": 440049,
+    "stratum_population": {
+      "multi/India": 156756,
+      "multi/US": 234808,
+      "one/India": 9456,
+      "one/US": 14528,
+      "zero/India": 9890,
+      "zero/US": 14611
+    },
+    "stratum_sample": {
+      "multi/India": 3562,
+      "multi/US": 5336,
+      "one/India": 215,
+      "one/US": 330,
+      "zero/India": 225,
+      "zero/US": 332
+    },
+    "countries": [
+      "India",
+      "US"
+    ],
+    "ordered_ids_sha256": "46f4e97b12541ea03b6c2bde323ca33591762a6482b8c4b587bf492c8f88f0f4",
+    "true_links": 34604,
+    "sample_selection_storage": "SQLite temporary file; full ground truth and holdout pool are not retained in Python memory"
+  },
+  "submission1_rules": "same-country exact normalized name+address OR exact normalized name+approved abbreviation-address; only if neither produces a match, emit normalized-name posting iff unique across S2+S3",
+  "experiments": {
+    "baseline": {
+      "macro_f0_5": 0.2234418788727612,
+      "micro_precision": 0.8908355795148248,
+      "micro_recall": 0.07640735175124264,
+      "tp": 2644,
+      "fp": 324,
+      "fn": 31960,
+      "predicted_links": 2968,
+      "zero_match_entities": 557,
+      "zero_match_correct_empty": 517,
+      "zero_match_accuracy": 0.9281867145421903,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8898,
+          "macro_f0_5": 0.1839086074092619,
+          "tp": 2563,
+          "fp": 250,
+          "fn": 31496
+        },
+        "zero": {
+          "entities": 557,
+          "macro_f0_5": 0.9281867145421903,
+          "tp": 0,
+          "fp": 40,
+          "fn": 0
+        },
+        "one": {
+          "entities": 545,
+          "macro_f0_5": 0.14862385321100918,
+          "tp": 81,
+          "fp": 34,
+          "fn": 464
+        }
+      },
+      "final_prediction_ids": 2968,
+      "per_s1": {
+        "zero": 7089,
+        "one": 2857,
+        "multi": 54
+      }
+    },
+    "addr_exact_name_sim_085": {
+      "macro_f0_5": 0.2712293437900249,
+      "micro_precision": 0.9176616915422886,
+      "micro_recall": 0.10660617269679806,
+      "tp": 3689,
+      "fp": 331,
+      "fn": 30915,
+      "predicted_links": 4020,
+      "zero_match_entities": 557,
+      "zero_match_correct_empty": 516,
+      "zero_match_accuracy": 0.926391382405745,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8898,
+          "macro_f0_5": 0.2357039152506461,
+          "tp": 3590,
+          "fp": 256,
+          "fn": 30469
+        },
+        "zero": {
+          "entities": 557,
+          "macro_f0_5": 0.926391382405745,
+          "tp": 0,
+          "fp": 41,
+          "fn": 0
+        },
+        "one": {
+          "entities": 545,
+          "macro_f0_5": 0.181651376146789,
+          "tp": 99,
+          "fp": 34,
+          "fn": 446
+        }
+      },
+      "final_prediction_ids": 4020,
+      "per_s1": {
+        "zero": 6486,
+        "one": 3081,
+        "multi": 433
+      }
+    },
+    "addr_exact_name_sim_080": {
+      "macro_f0_5": 0.2841361658564361,
+      "micro_precision": 0.9231300345224396,
+      "micro_recall": 0.11591145532308404,
+      "tp": 4011,
+      "fp": 334,
+      "fn": 30593,
+      "predicted_links": 4345,
+      "zero_match_entities": 557,
+      "zero_match_correct_empty": 516,
+      "zero_match_accuracy": 0.926391382405745,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8898,
+          "macro_f0_5": 0.24987206771907855,
+          "tp": 3909,
+          "fp": 259,
+          "fn": 30150
+        },
+        "zero": {
+          "entities": 557,
+          "macro_f0_5": 0.926391382405745,
+          "tp": 0,
+          "fp": 41,
+          "fn": 0
+        },
+        "one": {
+          "entities": 545,
+          "macro_f0_5": 0.1871559633027523,
+          "tp": 102,
+          "fp": 34,
+          "fn": 443
+        }
+      },
+      "final_prediction_ids": 4345,
+      "per_s1": {
+        "zero": 6337,
+        "one": 3091,
+        "multi": 572
+      }
+    },
+    "addr_exact_name_sim_075": {
+      "macro_f0_5": 0.2967329277452368,
+      "micro_precision": 0.9273899033297529,
+      "micro_recall": 0.12475436365738064,
+      "tp": 4317,
+      "fp": 338,
+      "fn": 30287,
+      "predicted_links": 4655,
+      "zero_match_entities": 557,
+      "zero_match_correct_empty": 516,
+      "zero_match_accuracy": 0.926391382405745,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8898,
+          "macro_f0_5": 0.26380414446531447,
+          "tp": 4213,
+          "fp": 263,
+          "fn": 29846
+        },
+        "zero": {
+          "entities": 557,
+          "macro_f0_5": 0.926391382405745,
+          "tp": 0,
+          "fp": 41,
+          "fn": 0
+        },
+        "one": {
+          "entities": 545,
+          "macro_f0_5": 0.1908256880733945,
+          "tp": 104,
+          "fp": 34,
+          "fn": 441
+        }
+      },
+      "final_prediction_ids": 4655,
+      "per_s1": {
+        "zero": 6183,
+        "one": 3132,
+        "multi": 685
+      }
+    },
+    "name_exact_addr_overlap_040": {
+      "macro_f0_5": 0.41087614094109304,
+      "micro_precision": 0.9166881942650478,
+      "micro_recall": 0.2050918968905329,
+      "tp": 7097,
+      "fp": 645,
+      "fn": 27507,
+      "predicted_links": 7742,
+      "zero_match_entities": 557,
+      "zero_match_correct_empty": 505,
+      "zero_match_accuracy": 0.9066427289048474,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8898,
+          "macro_f0_5": 0.3917884871241333,
+          "tp": 6976,
+          "fp": 532,
+          "fn": 27083
+        },
+        "zero": {
+          "entities": 557,
+          "macro_f0_5": 0.9066427289048474,
+          "tp": 0,
+          "fp": 56,
+          "fn": 0
+        },
+        "one": {
+          "entities": 545,
+          "macro_f0_5": 0.2158301852851232,
+          "tp": 121,
+          "fp": 57,
+          "fn": 424
+        }
+      },
+      "final_prediction_ids": 7742,
+      "per_s1": {
+        "zero": 4515,
+        "one": 3809,
+        "multi": 1676
+      }
+    },
+    "combined_085": {
+      "macro_f0_5": 0.4498188926038694,
+      "micro_precision": 0.9258585399135775,
+      "micro_recall": 0.23529071783608832,
+      "tp": 8142,
+      "fp": 652,
+      "fn": 26462,
+      "predicted_links": 8794,
+      "zero_match_entities": 557,
+      "zero_match_correct_empty": 504,
+      "zero_match_accuracy": 0.9048473967684022,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8898,
+          "macro_f0_5": 0.4336436811708589,
+          "tp": 8003,
+          "fp": 538,
+          "fn": 26056
+        },
+        "zero": {
+          "entities": 557,
+          "macro_f0_5": 0.9048473967684022,
+          "tp": 0,
+          "fp": 57,
+          "fn": 0
+        },
+        "one": {
+          "entities": 545,
+          "macro_f0_5": 0.24885770822090303,
+          "tp": 139,
+          "fp": 57,
+          "fn": 406
+        }
+      },
+      "final_prediction_ids": 8794,
+      "per_s1": {
+        "zero": 4100,
+        "one": 3821,
+        "multi": 2079
+      }
+    },
+    "combined_080": {
+      "macro_f0_5": 0.4603899881513077,
+      "micro_precision": 0.9281719486785832,
+      "micro_recall": 0.24459600046237429,
+      "tp": 8464,
+      "fp": 655,
+      "fn": 26140,
+      "predicted_links": 9119,
+      "zero_match_entities": 557,
+      "zero_match_correct_empty": 504,
+      "zero_match_accuracy": 0.9048473967684022,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8898,
+          "macro_f0_5": 0.44518683193219655,
+          "tp": 8322,
+          "fp": 541,
+          "fn": 25737
+        },
+        "zero": {
+          "entities": 557,
+          "macro_f0_5": 0.9048473967684022,
+          "tp": 0,
+          "fp": 57,
+          "fn": 0
+        },
+        "one": {
+          "entities": 545,
+          "macro_f0_5": 0.25436229537686633,
+          "tp": 142,
+          "fp": 57,
+          "fn": 403
+        }
+      },
+      "final_prediction_ids": 9119,
+      "per_s1": {
+        "zero": 3998,
+        "one": 3785,
+        "multi": 2217
+      }
+    },
+    "combined_075": {
+      "macro_f0_5": 0.47047309600100423,
+      "micro_precision": 0.9301092374589034,
+      "micro_recall": 0.2534389087966709,
+      "tp": 8770,
+      "fp": 659,
+      "fn": 25834,
+      "predicted_links": 9429,
+      "zero_match_entities": 557,
+      "zero_match_correct_empty": 504,
+      "zero_match_accuracy": 0.9048473967684022,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8898,
+          "macro_f0_5": 0.45629394347377505,
+          "tp": 8626,
+          "fp": 545,
+          "fn": 25433
+        },
+        "zero": {
+          "entities": 557,
+          "macro_f0_5": 0.9048473967684022,
+          "tp": 0,
+          "fp": 57,
+          "fn": 0
+        },
+        "one": {
+          "entities": 545,
+          "macro_f0_5": 0.25803202014750853,
+          "tp": 144,
+          "fp": 57,
+          "fn": 401
+        }
+      },
+      "final_prediction_ids": 9429,
+      "per_s1": {
+        "zero": 3897,
+        "one": 3768,
+        "multi": 2335
+      }
+    }
+  },
+  "marginal_vs_baseline": {
+    "addr_exact_name_sim_085": {
+      "added_true_links": 1045,
+      "added_false_links": 7,
+      "added_links": 1052
+    },
+    "addr_exact_name_sim_080": {
+      "added_true_links": 1367,
+      "added_false_links": 10,
+      "added_links": 1377
+    },
+    "addr_exact_name_sim_075": {
+      "added_true_links": 1673,
+      "added_false_links": 14,
+      "added_links": 1687
+    },
+    "name_exact_addr_overlap_040": {
+      "added_true_links": 4453,
+      "added_false_links": 321,
+      "added_links": 4774
+    },
+    "combined_085": {
+      "added_true_links": 5498,
+      "added_false_links": 328,
+      "added_links": 5826
+    },
+    "combined_080": {
+      "added_true_links": 5820,
+      "added_false_links": 331,
+      "added_links": 6151
+    },
+    "combined_075": {
+      "added_true_links": 6126,
+      "added_false_links": 335,
+      "added_links": 6461
+    }
+  },
+  "baseline_error_groups": {
+    "false_positive_links": {
+      "other": 324
+    },
+    "false_negative_links": {
+      "typo_like_name": 14004,
+      "address_variation_same_name": 4546,
+      "name_variation_same_address": 2964,
+      "other_or_candidate_miss": 7245,
+      "missing_target_address": 1386,
+      "name_order_or_punctuation": 1815
+    },
+    "examples": {
+      "typo_like_name": [
+        {
+          "s1": "S1-100376110",
+          "target": "S3-971284438",
+          "s1_name": "Exports Logix Ventures Private Limited",
+          "target_name": "Exports Logix Véntures Private Limited",
+          "s1_address": "Andhra Pradesh, Srikakulam, Door No.20/254, Brahmapuram, Near Sai Ganesh Temple, Machilipatnam",
+          "target_address": "Machilipatnam, AP, Srikakulam, Brahmapuram, Near Sai Ganesh Temple, Door No.20/254"
+        },
+        {
+          "s1": "S1-100376110",
+          "target": "S2-455022953",
+          "s1_name": "Exports Logix Ventures Private Limited",
+          "target_name": "Exports Lonix Ventures Private Limited",
+          "s1_address": "Andhra Pradesh, Srikakulam, Door No.20/254, Brahmapuram, Near Sai Ganesh Temple, Machilipatnam",
+          "target_address": "DOOR NO.B3/20/254 , BRAHMAPURAM, NEAR SAI GANESH TEMPLE, MACHILIPATNAM, Andhra Pradesh"
+        },
+        {
+          "s1": "S1-100376110",
+          "target": "S2-307724108",
+          "s1_name": "Exports Logix Ventures Private Limited",
+          "target_name": "Exports Logix Ventures Private Ltd",
+          "s1_address": "Andhra Pradesh, Srikakulam, Door No.20/254, Brahmapuram, Near Sai Ganesh Temple, Machilipatnam",
+          "target_address": "DOOR NO.B3/20/254 , BRAHMAPURAM, NEAR SAI GANESH TEMPLE, MACHILIPATNAM, Andhra Pradesh"
+        },
+        {
+          "s1": "S1-10056858",
+          "target": "S3-506805517",
+          "s1_name": "Sonanchal Marketing (India) Private Limited",
+          "target_name": "Sonanchal Marketing (India) Private  Ltd",
+          "s1_address": "J-14, Salunke Vihar, A.W.C.H.S, Kondhwa, Pune, Maharashtra",
+          "target_address": "J-14, Salunke Vihar, A.w.c.h.s, Kondhwa, Pune, MH"
+        },
+        {
+          "s1": "S1-10056858",
+          "target": "S3-761551787",
+          "s1_name": "Sonanchal Marketing (India) Private Limited",
+          "target_name": "Dr ... Sonanchal Marketing (India)Private Limited",
+          "s1_address": "J-14, Salunke Vihar, A.W.C.H.S, Kondhwa, Pune, Maharashtra",
+          "target_address": "Salunke Vihar, A.w.c.h.s, Kondhwa, MH, J-14, Pune"
+        },
+        {
+          "s1": "S1-10056858",
+          "target": "S2-563319721",
+          "s1_name": "Sonanchal Marketing (India) Private Limited",
+          "target_name": "Sonanchal Marketing (India)",
+          "s1_address": "J-14, Salunke Vihar, A.W.C.H.S, Kondhwa, Pune, Maharashtra",
+          "target_address": "J-14, SALUNKE VHIAR, A.W.C.H.S, KONDHWA, PUNE, महाराष्ट्र"
+        },
+        {
+          "s1": "S1-100779112",
+          "target": "S3-110555018",
+          "s1_name": "Om Apartments Pvt. Ltd.",
+          "target_name": ">> Om Apartments Pvt Ltd",
+          "s1_address": "North West Delhi, Block- E, Pocket 16 Sector 8 Rohini, Plot No. 290, North West Delhi, Delhi",
+          "target_address": "Plot No. 290, Block- E, Pocket 16 Sector 8 Rohini, North West Delhi, DL"
+        },
+        {
+          "s1": "S1-101355812",
+          "target": "S3-868652847",
+          "s1_name": "Baba Technologies Private Limited",
+          "target_name": "Baba Techn0logies  Private",
+          "s1_address": "M-150, Ground Floor, Block-M, Sector-25, Noida, Gautam Buddha Nagar, Uttar Pradesh",
+          "target_address": "M-150, Ground Floor, Block-m, Sector-25, Delhi, Noida, UP"
+        }
+      ],
+      "address_variation_same_name": [
+        {
+          "s1": "S1-100376110",
+          "target": "S2-711555212",
+          "s1_name": "Exports Logix Ventures Private Limited",
+          "target_name": "Exports Logix Ventures Private (Limited)",
+          "s1_address": "Andhra Pradesh, Srikakulam, Door No.20/254, Brahmapuram, Near Sai Ganesh Temple, Machilipatnam",
+          "target_address": "NO B3/20/254 , BRAHMAPURAM, NEAR SAI GANESH TEMPLE, MACHILIPATNAM, ఆంధ్రప్రదేశ్"
+        },
+        {
+          "s1": "S1-100376110",
+          "target": "S2-591044368",
+          "s1_name": "Exports Logix Ventures Private Limited",
+          "target_name": "Exports Logix Ventures  Private Limited",
+          "s1_address": "Andhra Pradesh, Srikakulam, Door No.20/254, Brahmapuram, Near Sai Ganesh Temple, Machilipatnam",
+          "target_address": "H.NO B3/20/254 , BRAHMAPURAM, NEAR SAI GANESH TEMPLE, MACHILIPATNAM, Andhra Pradesh"
+        },
+        {
+          "s1": "S1-100376110",
+          "target": "S3-770917025",
+          "s1_name": "Exports Logix Ventures Private Limited",
+          "target_name": "Exports Logix Ventures Private (Limited)",
+          "s1_address": "Andhra Pradesh, Srikakulam, Door No.20/254, Brahmapuram, Near Sai Ganesh Temple, Machilipatnam",
+          "target_address": "Door No.20/254, Brahmapuram, Near Sai Ganesh Temple, Machilipatnam, Srikakulam, ఆంధ్రప్రదేశ్"
+        },
+        {
+          "s1": "S1-100779112",
+          "target": "S3-72510031",
+          "s1_name": "Om Apartments Pvt. Ltd.",
+          "target_name": "Om Apartments Pvt. Ltd",
+          "s1_address": "North West Delhi, Block- E, Pocket 16 Sector 8 Rohini, Plot No. 290, North West Delhi, Delhi",
+          "target_address": "Plot No. 290, Block- E, Pocket 16 Sector 8 Rohini, North West Delhi, DL"
+        },
+        {
+          "s1": "S1-100779112",
+          "target": "S2-202421838",
+          "s1_name": "Om Apartments Pvt. Ltd.",
+          "target_name": "Om Apartments Pvt.  Ltd.",
+          "s1_address": "North West Delhi, Block- E, Pocket 16 Sector 8 Rohini, Plot No. 290, North West Delhi, Delhi",
+          "target_address": "PLOT NO. 290, BLOCK- E, POCKET 16 SECTOR 8 ROHINI, NORTH WEST DELHI, दिल्ली"
+        },
+        {
+          "s1": "S1-101355812",
+          "target": "S2-848837031",
+          "s1_name": "Baba Technologies Private Limited",
+          "target_name": "baba technologies private limited",
+          "s1_address": "M-150, Ground Floor, Block-M, Sector-25, Noida, Gautam Buddha Nagar, Uttar Pradesh",
+          "target_address": "M-150, GROUND FLOOR, BLOCK-M, SECTOR-25, NOIDA, Uttar Pradesh"
+        },
+        {
+          "s1": "S1-10145245",
+          "target": "S3-992245029",
+          "s1_name": "Future Trading Pvt Ltd",
+          "target_name": "Future-Trading Pvt Ltd",
+          "s1_address": "Reliance Capital Services Pvt Ltd, 5Th Floor, Off. No. 501-502, Sacred World, South Bloc, K, Wanawadi, Pune, Maharashtra",
+          "target_address": "Reliance Capital Services Pvt Ltd, 5Th Floor, Off. No. 501-502, Sacred World, South Bloc, K, Pune, Wanawadi, MH"
+        },
+        {
+          "s1": "S1-10145245",
+          "target": "S3-231942887",
+          "s1_name": "Future Trading Pvt Ltd",
+          "target_name": "FUTURE TRADING PVT LTD",
+          "s1_address": "Reliance Capital Services Pvt Ltd, 5Th Floor, Off. No. 501-502, Sacred World, South Bloc, K, Wanawadi, Pune, Maharashtra",
+          "target_address": "Reliance Capital Services Pvt Ltd, 5Th Floor, Off. No. 501-502, Sacred World, South Bloc, K, Wanawadi, Pune, MH"
+        }
+      ],
+      "name_variation_same_address": [
+        {
+          "s1": "S1-10056858",
+          "target": "S3-145088663",
+          "s1_name": "Sonanchal Marketing (India) Private Limited",
+          "target_name": "Sonanchal Marketing",
+          "s1_address": "J-14, Salunke Vihar, A.W.C.H.S, Kondhwa, Pune, Maharashtra",
+          "target_address": "J-14, Salunke Vihar, A.W.C.H.S, Kondhwa, Pune, Maharashtra"
+        },
+        {
+          "s1": "S1-101353943",
+          "target": "S3-387247941",
+          "s1_name": "Sai Golden Ventures Pvt Ltd",
+          "target_name": "Sai",
+          "s1_address": "House Number 499 Shivalik Colony, Ambala City, Ambala, Haryana",
+          "target_address": "House Number 499 Shivalik Colony, Ambala City, Ambala, Haryana"
+        },
+        {
+          "s1": "S1-101355812",
+          "target": "S2-582668767",
+          "s1_name": "Baba Technologies Private Limited",
+          "target_name": "बाबा टेक्नोलॉजीज प्राइवेट लिमिटेड",
+          "s1_address": "M-150, Ground Floor, Block-M, Sector-25, Noida, Gautam Buddha Nagar, Uttar Pradesh",
+          "target_address": "M-150, GROUND FLOOR, BLOCK-M, SECTOR-25, NOIDA, GAUTAM BUDDHA NAGAR, Uttar Pradesh"
+        },
+        {
+          "s1": "S1-104972213",
+          "target": "S2-917188945",
+          "s1_name": "Shivam Constructions Limited",
+          "target_name": "शिवम कंस्ट्रक्शंस लिमिटेड",
+          "s1_address": "545/1B Shrimanti Niwas Arihant Colony, Sangli, Maharashtra",
+          "target_address": "545/1B SHRIMANTI NIWAS ARIHANT COLONY, SANGLI, Maharashtra"
+        },
+        {
+          "s1": "S1-10511629",
+          "target": "S3-955131642",
+          "s1_name": "Premier Energy Private Limited",
+          "target_name": "PE",
+          "s1_address": "111 Harsha House Commercial Complex Karampura, New Delhi, West Delhi, Delhi",
+          "target_address": "111 Harsha House Commercial Complex Karampura, New Delhi, West Delhi, Delhi"
+        },
+        {
+          "s1": "S1-106298252",
+          "target": "S3-599415120",
+          "s1_name": "Alapuzha Farmer Clinic",
+          "target_name": "Evoorbi DBA: Alapuzha Farmer Clinic",
+          "s1_address": "Kuttanadu Farm Fuelsthekkekara P O Mancompu, Alapuzha, Alappuzha, Kerala",
+          "target_address": "Kuttanadu Farm Fuelsthekkekara P O Mancompu, Alapuzha, Alappuzha, Kerala"
+        },
+        {
+          "s1": "S1-110134896",
+          "target": "S2-564966500",
+          "s1_name": "TH Solutions Pvt Ltd",
+          "target_name": "TH SOLUTIONS [PVT]",
+          "s1_address": "104, First Floor Ram Vihar, Delhi",
+          "target_address": "104, FIRST FLOOR RAM VIHAR, Delhi"
+        },
+        {
+          "s1": "S1-110134896",
+          "target": "S2-95335886",
+          "s1_name": "TH Solutions Pvt Ltd",
+          "target_name": "TH Pvt Ltd Partners",
+          "s1_address": "104, First Floor Ram Vihar, Delhi",
+          "target_address": "104, FIRST FLOOR RAM VIHAR, Delhi"
+        }
+      ],
+      "other_or_candidate_miss": [
+        {
+          "s1": "S1-101369909",
+          "target": "S2-665695135",
+          "s1_name": "Bigg Hotels Pvt. Ltd.",
+          "target_name": "Bigg Pvt. Ltd. Service",
+          "s1_address": "179 National Media Centre, Nh-8, Gurgaon, Haryana",
+          "target_address": "Haryana, 179 NATIONAL MEDIA CENTRE, NH-8, GURGAON"
+        },
+        {
+          "s1": "S1-101369909",
+          "target": "S3-41322320",
+          "s1_name": "Bigg Hotels Pvt. Ltd.",
+          "target_name": "8igg Pvt. Ltd. Service",
+          "s1_address": "179 National Media Centre, Nh-8, Gurgaon, Haryana",
+          "target_address": "H.no 179 National Media Centre, Gurgaon, HR"
+        },
+        {
+          "s1": "S1-101369909",
+          "target": "S2-602368918",
+          "s1_name": "Bigg Hotels Pvt. Ltd.",
+          "target_name": "BIGG HOTELS PVT. LIMITED | www.bigghotel.com",
+          "s1_address": "179 National Media Centre, Nh-8, Gurgaon, Haryana",
+          "target_address": "#179 NATIONAL MEDIA CENTR, NH-8, GURGAON, Haryana"
+        },
+        {
+          "s1": "S1-10145245",
+          "target": "S2-724739161",
+          "s1_name": "Future Trading Pvt Ltd",
+          "target_name": "फ्यूचर ट्रेडिंग प्रा. लि.",
+          "s1_address": "Reliance Capital Services Pvt Ltd, 5Th Floor, Off. No. 501-502, Sacred World, South Bloc, K, Wanawadi, Pune, Maharashtra",
+          "target_address": "DOOR NO 119 RELIANCE CAPITAL SERVICES PVT LTD, 5TH FLOOR, OFF. NO. 501-502, SACRED WORLD, SOUTH BLOC, K, WANAWADI, PUNE, Maharashtra"
+        },
+        {
+          "s1": "S1-10145245",
+          "target": "S3-629460143",
+          "s1_name": "Future Trading Pvt Ltd",
+          "target_name": "Future Pvt Ltd Services",
+          "s1_address": "Reliance Capital Services Pvt Ltd, 5Th Floor, Off. No. 501-502, Sacred World, South Bloc, K, Wanawadi, Pune, Maharashtra",
+          "target_address": "Reliance Capital Services Pvt Ltd, 5Th Floor, Off. No. 501-502, Sacred World, South Bloc, K, Pune, Wanawadi, महाराष्ट्र"
+        },
+        {
+          "s1": "S1-10145245",
+          "target": "S2-873011896",
+          "s1_name": "Future Trading Pvt Ltd",
+          "target_name": "फ्यूचर ट्रेडिंग प्रा. लि.",
+          "s1_address": "Reliance Capital Services Pvt Ltd, 5Th Floor, Off. No. 501-502, Sacred World, South Bloc, K, Wanawadi, Pune, Maharashtra",
+          "target_address": "DOOR NO 119 RELIANCE CAPITAL SERVICES PVT LTD, 5TH FLOOR, OFF. NO. 501-502, SACRED WORLD, SOUTH BLOC, K, PUNE, WANAWADI, Maharashtra"
+        },
+        {
+          "s1": "S1-102193532",
+          "target": "S2-504696451",
+          "s1_name": "Universal Infra Private Limited",
+          "target_name": "ಯುನಿವರ್ಸಲ್ ಇನ್‌ಫ್ರಾ ಪ್ರೈವೇಟ್ ಲಿಮಿಟೆಡ್",
+          "s1_address": "Bangalore, Bengaluru, Coorg Land, 18Th Main 19A Cross, Padmanabhanagar, No. 11, Karnataka",
+          "target_address": "Karnataka, NO. 11, BANGALORE"
+        },
+        {
+          "s1": "S1-102193532",
+          "target": "S2-611001502",
+          "s1_name": "Universal Infra Private Limited",
+          "target_name": "ಯುನಿವರ್ಸಲ್ ಇನ್‌ಫ್ರಾ ಪ್ರೈವೇಟ್ ಲಿಮಿಟೆಡ್",
+          "s1_address": "Bangalore, Bengaluru, Coorg Land, 18Th Main 19A Cross, Padmanabhanagar, No. 11, Karnataka",
+          "target_address": "DOOR NO 11, BANGALORE, Karnataka"
+        }
+      ],
+      "missing_target_address": [
+        {
+          "s1": "S1-101369909",
+          "target": "S3-795340915",
+          "s1_name": "Bigg Hotels Pvt. Ltd.",
+          "target_name": "Bigg Hotels Pvt.",
+          "s1_address": "179 National Media Centre, Nh-8, Gurgaon, Haryana",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-10145245",
+          "target": "S3-378118225",
+          "s1_name": "Future Trading Pvt Ltd",
+          "target_name": "Sri future trading pvt ltd",
+          "s1_address": "Reliance Capital Services Pvt Ltd, 5Th Floor, Off. No. 501-502, Sacred World, South Bloc, K, Wanawadi, Pune, Maharashtra",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-101473810",
+          "target": "S3-941714978",
+          "s1_name": "Shree Brakes Pvt Ltd",
+          "target_name": "Shree Brákes Pvt Ltd",
+          "s1_address": "O-703, Lamburnam Park, Magarpatta City, Pune, Maharashtra",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-106492365",
+          "target": "S2-566023904",
+          "s1_name": "Shree Trading Private Limited",
+          "target_name": "Shree Trading-Private Limited",
+          "s1_address": "424/48, Near Telephone Exchange, Indra Colony, Jandli (Part)(113) Kanwala, Ambala, Haryana",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-108739458",
+          "target": "S3-491874625",
+          "s1_name": "Rayala Associates Limited",
+          "target_name": "Rayala Associates Limited",
+          "s1_address": "302, Kairos Homes, Bangalore South, Bangalore, Karnataka",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-110268918",
+          "target": "S2-626110866",
+          "s1_name": "Silver Exports Private Limited",
+          "target_name": "Silver Exports Private [Limited]",
+          "s1_address": "B/206, Star Classic Co-Op Hsg. Soc. Ltd. Chulna Bhabola Road, Opp. Rajhans Citis, Vasai Road West, Thane, Maharashtra",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-111925125",
+          "target": "S3-287931471",
+          "s1_name": "Universal Care Private Limited",
+          "target_name": "Universal  Cgaer Private Limited",
+          "s1_address": "Belgaum, Karnataka, Adarsh Nagar, Mekalmardi Road Nesargi Taluk Bailhongal District Belagavi, Bailhongal, 1212/1",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-117634752",
+          "target": "S2-662987066",
+          "s1_name": "Sky Infra Private Limited",
+          "target_name": "Sky Infra Pfrvtae Limited",
+          "s1_address": "12, Gyan Bhawan, Behind Sahara Tower Kapoorthala, Aliganj, Lucknow, Uttar Pradesh",
+          "target_address": ""
+        }
+      ],
+      "name_order_or_punctuation": [
+        {
+          "s1": "S1-101458378",
+          "target": "S2-613293110",
+          "s1_name": "Irish Ad Limited",
+          "target_name": "Irish Limited Ad",
+          "s1_address": "92A, C.R. Avenue 2Nd Floor, Room No. 1, Kolkata, Kolkata, Howrah, West Bengal",
+          "target_address": "DOOR NO 360 92A, C.R. AVENUE 2ND FLOOR, ROOM NO. 1, KOLKATA, KOLKATA, West Bengal"
+        },
+        {
+          "s1": "S1-101458378",
+          "target": "S2-761229407",
+          "s1_name": "Irish Ad Limited",
+          "target_name": "limited irish ad",
+          "s1_address": "92A, C.R. Avenue 2Nd Floor, Room No. 1, Kolkata, Kolkata, Howrah, West Bengal",
+          "target_address": "360 92A, C.R. AVENUE 2ND FLOOR, ROOM NO. 1, KOLKATA, KOLKATA, HOWRAH, West Bengal"
+        },
+        {
+          "s1": "S1-103361879",
+          "target": "S2-967846422",
+          "s1_name": "Nakoda Services Private Limited",
+          "target_name": "Limited Nakoda Services Private",
+          "s1_address": "101, B Wing, Royal Apartments, Prathana Samaj Road, Vile Parle East, Mumbai, Maharashtra",
+          "target_address": "MUMBAI, B WING, ROYAL APARTMENTS, PRATHANA SAMAJ ROAD, 101, महाराष्ट्र"
+        },
+        {
+          "s1": "S1-105624288",
+          "target": "S2-759768603",
+          "s1_name": "UAP Entrade Private Limited",
+          "target_name": "PRIVATE UAP ENTRADE LIMITED",
+          "s1_address": "10/1, Indira Street, 5Th Cross, Sundara Nagar, Tiruchirappalli, Tamil Nadu",
+          "target_address": "BLOCK A-605 10/1, TIRUCHIRAPALLY, TIRUCHIRAPPALLI, Tamil Nadu"
+        },
+        {
+          "s1": "S1-108739458",
+          "target": "S2-171597849",
+          "s1_name": "Rayala Associates Limited",
+          "target_name": "Rayala Limited Associates",
+          "s1_address": "302, Kairos Homes, Bangalore South, Bangalore, Karnataka",
+          "target_address": "302-, KAIROS HOMES, BAGNALORE SOUTH, Karnataka"
+        },
+        {
+          "s1": "S1-113279398",
+          "target": "S3-713264780",
+          "s1_name": "Future It Limited",
+          "target_name": "Future Limited It",
+          "s1_address": "8, A.J.C. Bose Road, Circular Court 4Th Floor, Unit No. 46, Kolkata, Kolkata, Howrah, West Bengal",
+          "target_address": "8, A.j.c. Bose Road, Circular Court 4Th Floor, Unit No. 46, Kolkata, Calcutta, Howrah, WB"
+        },
+        {
+          "s1": "S1-114559772",
+          "target": "S3-871776477",
+          "s1_name": "Travel (India) Consultants",
+          "target_name": "travel consultants (india)",
+          "s1_address": "C/O-Ashim Kumar Bose, 35B Rajendra Road, Kolkata, Kolkata, Howrah, West Bengal",
+          "target_address": "C/o-ashim Kumar Bose, 35B Rajendra Road, Kolkata, Kolkata, Howrah, পশ্চিমবঙ্গ"
+        },
+        {
+          "s1": "S1-116541487",
+          "target": "S3-413888657",
+          "s1_name": "New Delhi Medical Private Limited",
+          "target_name": "New Medical  Delhi Private Limited",
+          "s1_address": "Plot And Shop No. B-2/317, Kh-202/21, Tara Nagar, South West Delhi, Delhi, New Delhi",
+          "target_address": "Plot And Shop No. B-2/317, Kh-202/21, Tara Nagar, South West Delhi, New Delhi, DL"
+        }
+      ],
+      "FP_other": [
+        {
+          "s1": "S1-113257005",
+          "target": "S3-610005937",
+          "s1_name": "Majestic Medical Centre",
+          "target_name": "Majestic Medical-Centre",
+          "s1_address": "Jind, Haryana, Rohtak Gohana Bye Pass Road, Jind",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-113279398",
+          "target": "S3-290490758",
+          "s1_name": "Future It Limited",
+          "target_name": "future it limited",
+          "s1_address": "8, A.J.C. Bose Road, Circular Court 4Th Floor, Unit No. 46, Kolkata, Kolkata, Howrah, West Bengal",
+          "target_address": "H.no. G-12, Bhawnapur Sukrauli, Chaudhary, UP, Basti"
+        },
+        {
+          "s1": "S1-12015466",
+          "target": "S2-575555859",
+          "s1_name": "Xanadu Bay",
+          "target_name": "xanadu bay",
+          "s1_address": "Office No. 204, Second Floor, Solitare Business Hub S. No. 208/206, Wakad, Pune, Maharashtra",
+          "target_address": "20, PRAVASI NAGAR, JAIPUR, Rajasthan"
+        },
+        {
+          "s1": "S1-120471703",
+          "target": "S3-882147388",
+          "s1_name": "Shivam Consultants LLP",
+          "target_name": "Shivam Consultants LLP",
+          "s1_address": "425/73 Pariwar Apt, T.M.V Colony Gultekadi, Pune City, Pune, Maharashtra",
+          "target_address": "Office No. 13, Thrissur, KL"
+        },
+        {
+          "s1": "S1-133983102",
+          "target": "S2-818268982",
+          "s1_name": "Dkv India LLP",
+          "target_name": "DKV-INDIA LLP",
+          "s1_address": "Swastik Enclave, Bl-C;2-Fr; Fl-208 A, 7 Ganpat Bagla Road, Kolkata, Kolkata, Howrah, West Bengal",
+          "target_address": "H.NO 301 YAMUNA BLK Y -4 SEC -D PKT -6 . VASANT KUNJ, DELHI, Delhi"
+        },
+        {
+          "s1": "S1-136148724",
+          "target": "S3-556582837",
+          "s1_name": "Md Services Limited",
+          "target_name": "MD Services (Limited)",
+          "s1_address": "C/O Shri Arvind Paliwal, Bhagwanda Khurd Gram Panchayat- Mundol, Tehsil & Distt., Rajsamand, Rajasthan",
+          "target_address": "TG, Rd. No.10, Rr Nagar, Old Bowenpally, #8-7-32/37, Hyderabad, Tirumalagiri"
+        },
+        {
+          "s1": "S1-14289797",
+          "target": "S3-10235836",
+          "s1_name": "United Consultants Pvt Ltd",
+          "target_name": "United Consultants Pvt-Ltd",
+          "s1_address": "Siliguri Road Khagrabarip O & Dist Cooch Behar, Cooch Behar, Coochbehar, West Bengal",
+          "target_address": "Bilochi, Jaipur, RJ"
+        },
+        {
+          "s1": "S1-147827298",
+          "target": "S3-139071034",
+          "s1_name": "Bharat Media Pvt Ltd",
+          "target_name": "Bharat Media Pvt Ltd",
+          "s1_address": "2/12 Hodebeeranalli, Kalaburagi, Chincholi, Gulbarga, Karnataka",
+          "target_address": "Wz-374, Ist Floor, Gali No - 2, Sant Garh, Tilak Nagar, West Delhi, Delhi, DL"
+        }
+      ]
+    }
+  },
+  "runtime": {
+    "total_seconds": 206.757,
+    "target_scan_seconds": 174.648,
+    "target_rows_streamed": 10320219,
+    "final_prediction_ids_by_mode": {
+      "baseline": 2968,
+      "addr_exact_name_sim_085": 4020,
+      "addr_exact_name_sim_080": 4345,
+      "addr_exact_name_sim_075": 4655,
+      "name_exact_addr_overlap_040": 7742,
+      "combined_085": 8794,
+      "combined_080": 9119,
+      "combined_075": 9429
+    }
+  },
+  "limitations": [
+    "Single deterministic holdout sample; rule thresholds were prespecified, but sampling uncertainty remains.",
+    "Training labels can contain noise; string-based categories are diagnostic proxies, not adjudication.",
+    "Country validation covers only countries present in supplied training data."
+  ]
+}

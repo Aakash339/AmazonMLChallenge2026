@@ -1,0 +1,899 @@
+{
+  "title": "Submission #1 held-out reproduction and controlled rule experiments",
+  "sample": {
+    "split_seed": 20260927,
+    "sample_seed": 20260928,
+    "holdout_definition": "SHA256(split_seed + NUL + S1 ID) integer mod 5 == 1; this bucket is disjoint from other hash buckets",
+    "sample_method": "population-proportional stratified bottom-k by match class x country within holdout pool",
+    "sample_size": 10000,
+    "holdout_population": 441263,
+    "stratum_population": {
+      "multi/India": 157239,
+      "multi/US": 235535,
+      "one/India": 9456,
+      "one/US": 14303,
+      "zero/India": 10056,
+      "zero/US": 14674
+    },
+    "stratum_sample": {
+      "multi/India": 3563,
+      "multi/US": 5338,
+      "one/India": 214,
+      "one/US": 324,
+      "zero/India": 228,
+      "zero/US": 333
+    },
+    "countries": [
+      "India",
+      "US"
+    ],
+    "ordered_ids_sha256": "a3ccb4534789527622ebe33a4c5ea99bfeb7b59fe18df9687298c4668c245fb3",
+    "true_links": 34611,
+    "sample_selection_storage": "SQLite temporary file; full ground truth and holdout pool are not retained in Python memory"
+  },
+  "submission1_rules": "same-country exact normalized name+address OR exact normalized name+approved abbreviation-address; only if neither produces a match, emit normalized-name posting iff unique across S2+S3",
+  "experiments": {
+    "baseline": {
+      "macro_f0_5": 0.22049445268783507,
+      "micro_precision": 0.8868575370817523,
+      "micro_recall": 0.07428274248071422,
+      "tp": 2571,
+      "fp": 328,
+      "fn": 32040,
+      "predicted_links": 2899,
+      "zero_match_entities": 561,
+      "zero_match_correct_empty": 532,
+      "zero_match_accuracy": 0.948306595365419,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8901,
+          "macro_f0_5": 0.17817599448133362,
+          "tp": 2484,
+          "fp": 272,
+          "fn": 31589
+        },
+        "one": {
+          "entities": 538,
+          "macro_f0_5": 0.16171003717472118,
+          "tp": 87,
+          "fp": 27,
+          "fn": 451
+        },
+        "zero": {
+          "entities": 561,
+          "macro_f0_5": 0.948306595365419,
+          "tp": 0,
+          "fp": 29,
+          "fn": 0
+        }
+      },
+      "final_prediction_ids": 2899,
+      "per_s1": {
+        "zero": 7148,
+        "one": 2808,
+        "multi": 44
+      }
+    },
+    "addr_exact_name_sim_085": {
+      "macro_f0_5": 0.26905310629087265,
+      "micro_precision": 0.9172276240339068,
+      "micro_recall": 0.10629568634249227,
+      "tp": 3679,
+      "fp": 332,
+      "fn": 30932,
+      "predicted_links": 4011,
+      "zero_match_entities": 561,
+      "zero_match_correct_empty": 532,
+      "zero_match_accuracy": 0.948306595365419,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8901,
+          "macro_f0_5": 0.23098253087890921,
+          "tp": 3576,
+          "fp": 276,
+          "fn": 30497
+        },
+        "one": {
+          "entities": 538,
+          "macro_f0_5": 0.1906237092110698,
+          "tp": 103,
+          "fp": 27,
+          "fn": 435
+        },
+        "zero": {
+          "entities": 561,
+          "macro_f0_5": 0.948306595365419,
+          "tp": 0,
+          "fp": 29,
+          "fn": 0
+        }
+      },
+      "final_prediction_ids": 4011,
+      "per_s1": {
+        "zero": 6575,
+        "one": 2944,
+        "multi": 481
+      }
+    },
+    "addr_exact_name_sim_080": {
+      "macro_f0_5": 0.28277743919611925,
+      "micro_precision": 0.9236957021374397,
+      "micro_recall": 0.11611915287047471,
+      "tp": 4019,
+      "fp": 332,
+      "fn": 30592,
+      "predicted_links": 4351,
+      "zero_match_entities": 561,
+      "zero_match_correct_empty": 532,
+      "zero_match_accuracy": 0.948306595365419,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8901,
+          "macro_f0_5": 0.24595200948271395,
+          "tp": 3912,
+          "fp": 276,
+          "fn": 30161
+        },
+        "one": {
+          "entities": 538,
+          "macro_f0_5": 0.19805865344898801,
+          "tp": 107,
+          "fp": 27,
+          "fn": 431
+        },
+        "zero": {
+          "entities": 561,
+          "macro_f0_5": 0.948306595365419,
+          "tp": 0,
+          "fp": 29,
+          "fn": 0
+        }
+      },
+      "final_prediction_ids": 4351,
+      "per_s1": {
+        "zero": 6420,
+        "one": 2959,
+        "multi": 621
+      }
+    },
+    "addr_exact_name_sim_075": {
+      "macro_f0_5": 0.2947667956785788,
+      "micro_precision": 0.9281102023245803,
+      "micro_recall": 0.12458466961370662,
+      "tp": 4312,
+      "fp": 334,
+      "fn": 30299,
+      "predicted_links": 4646,
+      "zero_match_entities": 561,
+      "zero_match_correct_empty": 531,
+      "zero_match_accuracy": 0.946524064171123,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8901,
+          "macro_f0_5": 0.259421683095184,
+          "tp": 4204,
+          "fp": 277,
+          "fn": 29869
+        },
+        "one": {
+          "entities": 538,
+          "macro_f0_5": 0.19991738950846757,
+          "tp": 108,
+          "fp": 27,
+          "fn": 430
+        },
+        "zero": {
+          "entities": 561,
+          "macro_f0_5": 0.946524064171123,
+          "tp": 0,
+          "fp": 30,
+          "fn": 0
+        }
+      },
+      "final_prediction_ids": 4646,
+      "per_s1": {
+        "zero": 6275,
+        "one": 2994,
+        "multi": 731
+      }
+    },
+    "name_exact_addr_overlap_040": {
+      "macro_f0_5": 0.41113487172758023,
+      "micro_precision": 0.9158938691396188,
+      "micro_recall": 0.2054549131778914,
+      "tp": 7111,
+      "fp": 653,
+      "fn": 27500,
+      "predicted_links": 7764,
+      "zero_match_entities": 561,
+      "zero_match_correct_empty": 519,
+      "zero_match_accuracy": 0.9251336898395722,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8901,
+          "macro_f0_5": 0.388608394290244,
+          "tp": 6975,
+          "fp": 530,
+          "fn": 27098
+        },
+        "one": {
+          "entities": 538,
+          "macro_f0_5": 0.24785390278502023,
+          "tp": 136,
+          "fp": 66,
+          "fn": 402
+        },
+        "zero": {
+          "entities": 561,
+          "macro_f0_5": 0.9251336898395722,
+          "tp": 0,
+          "fp": 57,
+          "fn": 0
+        }
+      },
+      "final_prediction_ids": 7764,
+      "per_s1": {
+        "zero": 4556,
+        "one": 3725,
+        "multi": 1719
+      }
+    },
+    "combined_085": {
+      "macro_f0_5": 0.45236324291402125,
+      "micro_precision": 0.92598017124831,
+      "micro_recall": 0.23746785703966947,
+      "tp": 8219,
+      "fp": 657,
+      "fn": 26392,
+      "predicted_links": 8876,
+      "zero_match_entities": 561,
+      "zero_match_correct_empty": 519,
+      "zero_match_accuracy": 0.9251336898395722,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8901,
+          "macro_f0_5": 0.43317958362951536,
+          "tp": 8067,
+          "fp": 534,
+          "fn": 26006
+        },
+        "one": {
+          "entities": 538,
+          "macro_f0_5": 0.2767675748213688,
+          "tp": 152,
+          "fp": 66,
+          "fn": 386
+        },
+        "zero": {
+          "entities": 561,
+          "macro_f0_5": 0.9251336898395722,
+          "tp": 0,
+          "fp": 57,
+          "fn": 0
+        }
+      },
+      "final_prediction_ids": 8876,
+      "per_s1": {
+        "zero": 4136,
+        "one": 3694,
+        "multi": 2170
+      }
+    },
+    "combined_080": {
+      "macro_f0_5": 0.4637681672929243,
+      "micro_precision": 0.9287109375,
+      "micro_recall": 0.2472913235676519,
+      "tp": 8559,
+      "fp": 657,
+      "fn": 26052,
+      "predicted_links": 9216,
+      "zero_match_entities": 561,
+      "zero_match_correct_empty": 519,
+      "zero_match_accuracy": 0.9251336898395722,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8901,
+          "macro_f0_5": 0.44554327802217136,
+          "tp": 8403,
+          "fp": 534,
+          "fn": 25670
+        },
+        "one": {
+          "entities": 538,
+          "macro_f0_5": 0.28420251905928706,
+          "tp": 156,
+          "fp": 66,
+          "fn": 382
+        },
+        "zero": {
+          "entities": 561,
+          "macro_f0_5": 0.9251336898395722,
+          "tp": 0,
+          "fp": 57,
+          "fn": 0
+        }
+      },
+      "final_prediction_ids": 9216,
+      "per_s1": {
+        "zero": 4026,
+        "one": 3672,
+        "multi": 2302
+      }
+    },
+    "combined_075": {
+      "macro_f0_5": 0.47394740358128784,
+      "micro_precision": 0.9307118073809273,
+      "micro_recall": 0.2557568403108838,
+      "tp": 8852,
+      "fp": 659,
+      "fn": 25759,
+      "predicted_links": 9511,
+      "zero_match_entities": 561,
+      "zero_match_correct_empty": 518,
+      "zero_match_accuracy": 0.9233511586452763,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8901,
+          "macro_f0_5": 0.4569793372159288,
+          "tp": 8695,
+          "fp": 535,
+          "fn": 25378
+        },
+        "one": {
+          "entities": 538,
+          "macro_f0_5": 0.28606125511876657,
+          "tp": 157,
+          "fp": 66,
+          "fn": 381
+        },
+        "zero": {
+          "entities": 561,
+          "macro_f0_5": 0.9233511586452763,
+          "tp": 0,
+          "fp": 58,
+          "fn": 0
+        }
+      },
+      "final_prediction_ids": 9511,
+      "per_s1": {
+        "zero": 3922,
+        "one": 3657,
+        "multi": 2421
+      }
+    }
+  },
+  "marginal_vs_baseline": {
+    "addr_exact_name_sim_085": {
+      "added_true_links": 1108,
+      "added_false_links": 4,
+      "added_links": 1112
+    },
+    "addr_exact_name_sim_080": {
+      "added_true_links": 1448,
+      "added_false_links": 4,
+      "added_links": 1452
+    },
+    "addr_exact_name_sim_075": {
+      "added_true_links": 1741,
+      "added_false_links": 6,
+      "added_links": 1747
+    },
+    "name_exact_addr_overlap_040": {
+      "added_true_links": 4540,
+      "added_false_links": 325,
+      "added_links": 4865
+    },
+    "combined_085": {
+      "added_true_links": 5648,
+      "added_false_links": 329,
+      "added_links": 5977
+    },
+    "combined_080": {
+      "added_true_links": 5988,
+      "added_false_links": 329,
+      "added_links": 6317
+    },
+    "combined_075": {
+      "added_true_links": 6281,
+      "added_false_links": 331,
+      "added_links": 6612
+    }
+  },
+  "baseline_error_groups": {
+    "false_positive_links": {
+      "other": 328
+    },
+    "false_negative_links": {
+      "other_or_candidate_miss": 7236,
+      "name_variation_same_address": 2918,
+      "address_variation_same_name": 4618,
+      "name_order_or_punctuation": 1779,
+      "missing_target_address": 1416,
+      "typo_like_name": 14073
+    },
+    "examples": {
+      "other_or_candidate_miss": [
+        {
+          "s1": "S1-100107699",
+          "target": "S3-873157879",
+          "s1_name": "Golden Bright Builders Limited",
+          "target_name": "Golden Bright Limited Center",
+          "s1_address": "11-129-1 Options Home, Stay Kohinoor Road, Madikeri, Kodagu, Karnataka",
+          "target_address": "Madikeri, H.no B3/11-129-1 Options Home, KA, Kodagu"
+        },
+        {
+          "s1": "S1-100107699",
+          "target": "S2-609619174",
+          "s1_name": "Golden Bright Builders Limited",
+          "target_name": "ಗೋಲ್ಡನ್ ಬ್ರೈಟ್ ಬಿಲ್ಡರ್ಸ್ ಲಿಮಿಟೆಡ್",
+          "s1_address": "11-129-1 Options Home, Stay Kohinoor Road, Madikeri, Kodagu, Karnataka",
+          "target_address": "#61-129-1 OPTIONS HOME, MADIKERI, KODAGU, Karnataka"
+        },
+        {
+          "s1": "S1-100721496",
+          "target": "S2-915651725",
+          "s1_name": "Jain Technology Private Limited",
+          "target_name": "ജൈൻ ടെക്നോളജി പ്രൈവറ്റ് ലിമിറ്റഡ്",
+          "s1_address": "Stall No. L-23, Agricultural Urban Wholesale Market, Kozhikode, Kerala",
+          "target_address": "STALL NO. L-23, KOZHIKODE, Keralam"
+        },
+        {
+          "s1": "S1-100721496",
+          "target": "S2-221300656",
+          "s1_name": "Jain Technology Private Limited",
+          "target_name": "ജൈൻ ടെക്നോളജി പ്രൈവറ്റ് ലിമിറ്റഡ്",
+          "s1_address": "Stall No. L-23, Agricultural Urban Wholesale Market, Kozhikode, Kerala",
+          "target_address": "STALL NO. L-23, KOZHIKODE, Keralam"
+        },
+        {
+          "s1": "S1-100721496",
+          "target": "S3-442590430",
+          "s1_name": "Jain Technology Private Limited",
+          "target_name": "ജൈൻ ടെക്നോളജി പ്രൈവറ്റ് ലിമിറ്റഡ്",
+          "s1_address": "Stall No. L-23, Agricultural Urban Wholesale Market, Kozhikode, Kerala",
+          "target_address": "Stall No. L-23, Agricultural Urban Wholesale Market, Kozhikode, Keralam"
+        },
+        {
+          "s1": "S1-100721496",
+          "target": "S2-963935042",
+          "s1_name": "Jain Technology Private Limited",
+          "target_name": "ജൈൻ ടെക്നോളജി പ്രൈവറ്റ് ലിമിറ്റഡ്",
+          "s1_address": "Stall No. L-23, Agricultural Urban Wholesale Market, Kozhikode, Kerala",
+          "target_address": "STALL NO. L-23, KOZHIKODE, Keralam"
+        },
+        {
+          "s1": "S1-100902803",
+          "target": "S2-178294856",
+          "s1_name": "Sai Business Private Limited",
+          "target_name": "साईं बिजनेस प्राइवेट लिमिटेड",
+          "s1_address": "Ist Floor, Jawari Bhawan, High Court Colony, Jodhpur, Rajasthan",
+          "target_address": "IST FLOOR, JAWARI BHAWAN, SIROHI, HIGH COURT COLONY, Rajasthan"
+        },
+        {
+          "s1": "S1-101455301",
+          "target": "S2-344690775",
+          "s1_name": "Great Trading Private Limited",
+          "target_name": "ग्रेट ट्रेडिंग प्राइवेट लिमिटेड",
+          "s1_address": "Plot No. 20, Anand Vihar-C, Machera, Jaipur, Rajasthan",
+          "target_address": "PLOT NO. 020, MACHERA, Rajasthan"
+        }
+      ],
+      "name_variation_same_address": [
+        {
+          "s1": "S1-100107699",
+          "target": "S3-312778310",
+          "s1_name": "Golden Bright Builders Limited",
+          "target_name": "Golden",
+          "s1_address": "11-129-1 Options Home, Stay Kohinoor Road, Madikeri, Kodagu, Karnataka",
+          "target_address": "11-129-1 Options Home, Stay Kohinoor Road, Madikeri, Kodagu, Karnataka"
+        },
+        {
+          "s1": "S1-100358069",
+          "target": "S3-92102746",
+          "s1_name": "Systems Anand Mutual Pvt Ltd",
+          "target_name": "Anand Systems",
+          "s1_address": "603 Shiv Appts, A Wing, Chincholi Bunder Rd, Malad West, Mumbai, Mumbai City, Maharashtra",
+          "target_address": "603 Shiv Appts, A Wing, Chincholi Bunder Rd, Malad West, Mumbai, Mumbai City, Maharashtra"
+        },
+        {
+          "s1": "S1-10103983",
+          "target": "S3-917157987",
+          "s1_name": "Bright Products",
+          "target_name": "Bright",
+          "s1_address": "94B, Pandey House, August Kranti Marg, Opp Cumbala Hill Hospital, Mumbai, Mumbai City, Maharashtra",
+          "target_address": "94B, Pandey House, August Kranti Marg, Opp Cumbala Hill Hospital, Mumbai, Mumbai City, Maharashtra"
+        },
+        {
+          "s1": "S1-10103983",
+          "target": "S2-737941121",
+          "s1_name": "Bright Products",
+          "target_name": "ब्राइट प्रोडक्ट्स",
+          "s1_address": "94B, Pandey House, August Kranti Marg, Opp Cumbala Hill Hospital, Mumbai, Mumbai City, Maharashtra",
+          "target_address": "94B, PANDEY HOUSE, AUGUST KRANTI MARG, OPP CUMBALA HILL HOSPITAL, MUMBAI, MUMBAI CITY, Maharashtra"
+        },
+        {
+          "s1": "S1-101778002",
+          "target": "S2-767096654",
+          "s1_name": "Jade & Co",
+          "target_name": "Jade & Có",
+          "s1_address": "B-4/16 Woodland Complex, Main Road Mira Road East, Thane, Maharashtra",
+          "target_address": "B-4/16 WOODLAND COMPLEX, MAIN ROAD MIRA ROAD EAST, THANE, Maharashtra"
+        },
+        {
+          "s1": "S1-102099188",
+          "target": "S2-725735204",
+          "s1_name": "White Power Pvt Ltd",
+          "target_name": "व्हाइट पावर प्रा. लि.",
+          "s1_address": "209, Saraswati Kunj Sector 53, Gurugram, Gurgaon, Haryana",
+          "target_address": "209, SARASWATI KUNJ SECTOR 53, GURUGRAM, GURGAON, Haryana"
+        },
+        {
+          "s1": "S1-104699831",
+          "target": "S2-136046082",
+          "s1_name": "Krishna Consultants Private Limited",
+          "target_name": "कृष्णा कंसल्टेंट्स प्राइवेट लिमिटेड",
+          "s1_address": "Plot No.C-5/2, Midc, Lote, Khed, Khed (Rtg), Ratnagiri, Maharashtra",
+          "target_address": "PLOT NO.C-5/2, MIDC, LOTE, KHED, KHED (RTG), RATNAGIRI, Maharashtra"
+        },
+        {
+          "s1": "S1-104699831",
+          "target": "S2-755627772",
+          "s1_name": "Krishna Consultants Private Limited",
+          "target_name": "कृष्ण कंसल्टेंट्स प्राइवेट लिमिटेड",
+          "s1_address": "Plot No.C-5/2, Midc, Lote, Khed, Khed (Rtg), Ratnagiri, Maharashtra",
+          "target_address": "PLOT NO.C-5/2, MIDC, LOTE, KHED, KHED (RTG), RATNAGIRI, Maharashtra"
+        }
+      ],
+      "address_variation_same_name": [
+        {
+          "s1": "S1-100358069",
+          "target": "S3-55192692",
+          "s1_name": "Systems Anand Mutual Pvt Ltd",
+          "target_name": "Systems Anand-Mutual Pvt Ltd",
+          "s1_address": "603 Shiv Appts, A Wing, Chincholi Bunder Rd, Malad West, Mumbai, Mumbai City, Maharashtra",
+          "target_address": "603 Shiv Appts, A Wing, Chincholi Bunder Rd, Malad West, Mumbai, Mumbai City, महाराष्ट्र"
+        },
+        {
+          "s1": "S1-100358069",
+          "target": "S3-461031641",
+          "s1_name": "Systems Anand Mutual Pvt Ltd",
+          "target_name": "Systems Anand Mutual Pvt Ltd",
+          "s1_address": "603 Shiv Appts, A Wing, Chincholi Bunder Rd, Malad West, Mumbai, Mumbai City, Maharashtra",
+          "target_address": "603 Shiv Appts, A Wing, Chincholi Bunder Rd, Malad West, Mumbai, Mumbai City, MH"
+        },
+        {
+          "s1": "S1-10103983",
+          "target": "S3-156520244",
+          "s1_name": "Bright Products",
+          "target_name": "Bright  Products",
+          "s1_address": "94B, Pandey House, August Kranti Marg, Opp Cumbala Hill Hospital, Mumbai, Mumbai City, Maharashtra",
+          "target_address": "B3/94b, Pandey House, August Kranti Marg, Opp Cumbala Hill Hospital, Mumbai, Mumbai City, MH"
+        },
+        {
+          "s1": "S1-10103983",
+          "target": "S3-727311703",
+          "s1_name": "Bright Products",
+          "target_name": "Bright (Products)",
+          "s1_address": "94B, Pandey House, August Kranti Marg, Opp Cumbala Hill Hospital, Mumbai, Mumbai City, Maharashtra",
+          "target_address": "B3/94b, Pandey House, August Kranti Marg, Opp Cumbala Hill Hospital, Mumbai City, Mumbai, MH"
+        },
+        {
+          "s1": "S1-101455301",
+          "target": "S2-758466341",
+          "s1_name": "Great Trading Private Limited",
+          "target_name": "great trading private limited",
+          "s1_address": "Plot No. 20, Anand Vihar-C, Machera, Jaipur, Rajasthan",
+          "target_address": "NO 020 , ANAND VIHAR-C, MACHERA, Rajasthan"
+        },
+        {
+          "s1": "S1-101455301",
+          "target": "S3-211221239",
+          "s1_name": "Great Trading Private Limited",
+          "target_name": "Great Trading Private Limited",
+          "s1_address": "Plot No. 20, Anand Vihar-C, Machera, Jaipur, Rajasthan",
+          "target_address": "Jaipur, Plot No. 20, Machera, RJ, Anand Vihar-c"
+        },
+        {
+          "s1": "S1-102061191",
+          "target": "S3-945974175",
+          "s1_name": "Ml International Center",
+          "target_name": "Ml International Center",
+          "s1_address": "No.256/1, Chinniampalayam, Coimbatore, Tamil Nadu",
+          "target_address": "No.256/1, Chinniampalayam, Coimbatore, TN"
+        },
+        {
+          "s1": "S1-102061191",
+          "target": "S3-920406663",
+          "s1_name": "Ml International Center",
+          "target_name": "Ml International  Center",
+          "s1_address": "No.256/1, Chinniampalayam, Coimbatore, Tamil Nadu",
+          "target_address": "No.256/1, Coimbatore, TN"
+        }
+      ],
+      "name_order_or_punctuation": [
+        {
+          "s1": "S1-100358069",
+          "target": "S3-960237653",
+          "s1_name": "Systems Anand Mutual Pvt Ltd",
+          "target_name": "-- Systems Anand  Mutual Ltd Pvt",
+          "s1_address": "603 Shiv Appts, A Wing, Chincholi Bunder Rd, Malad West, Mumbai, Mumbai City, Maharashtra",
+          "target_address": "603 Shiv Appts, A Wing, Chincholi Bunder Rd, Malad West, Mumbai, Mumbai City, MH"
+        },
+        {
+          "s1": "S1-101135446",
+          "target": "S2-157429756",
+          "s1_name": "Life Services Pvt Ltd",
+          "target_name": "Life Services Pvt Pvt Ltd.",
+          "s1_address": "38 Zakaria Streetground Floor, Kolkata, South 24 Parganas, West Bengal",
+          "target_address": "DOOR NO 38 ZAKARIA STREETGROUND FLOOR, KOLKATA, West Bengal"
+        },
+        {
+          "s1": "S1-101135446",
+          "target": "S2-308873552",
+          "s1_name": "Life Services Pvt Ltd",
+          "target_name": "Life Ltd-Pvt Services",
+          "s1_address": "38 Zakaria Streetground Floor, Kolkata, South 24 Parganas, West Bengal",
+          "target_address": "H.NO 38 ZAKARIA STREETGROUND FLOOR, KOLKATA, West Bengal"
+        },
+        {
+          "s1": "S1-105698508",
+          "target": "S2-626272637",
+          "s1_name": "Services Inter Fund of Nadia Limited",
+          "target_name": "SERVICES INTER NADIA OF FUND LIMITED",
+          "s1_address": "Vill : Po Charichara Para Bazar Road, Nadia, West Bengal",
+          "target_address": "West Bengal, HN 377. VILL : PO CHARICHARA PARA BAZAR ROAD, NADIA"
+        },
+        {
+          "s1": "S1-109252152",
+          "target": "S2-70202275",
+          "s1_name": "Jay Logistics Private Limited",
+          "target_name": "Jay Private Logistics Limited",
+          "s1_address": "Sr.No 83/1 Shri Ram Nivas, Sai Park, Pune City, Pune, Maharashtra",
+          "target_address": "SR.NO 83/1 SHRI RAM NIVAS, SAI PARK, PUNE CITY, Maharashtra"
+        },
+        {
+          "s1": "S1-110453330",
+          "target": "S2-524572360",
+          "s1_name": "Dmr Vidyalaya Partners",
+          "target_name": "vidyalaya dmr partners",
+          "s1_address": "Shop No.14, Shoe Market, Sanjay Palce, Agra, Block No. 4, Uttar Pradesh, Agra",
+          "target_address": "BLOCK NO. 4, AGRA, Uttar Pradesh"
+        },
+        {
+          "s1": "S1-110453330",
+          "target": "S3-394553089",
+          "s1_name": "Dmr Vidyalaya Partners",
+          "target_name": "partners vidyalaya dmr",
+          "s1_address": "Shop No.14, Shoe Market, Sanjay Palce, Agra, Block No. 4, Uttar Pradesh, Agra",
+          "target_address": "Block No. ##4, Agra, UP"
+        },
+        {
+          "s1": "S1-111600079",
+          "target": "S3-269606730",
+          "s1_name": "Hyderabad Developement Private Limited",
+          "target_name": "Hyderabad Private Developement Limited",
+          "s1_address": "Lig-B-543 A S Rao Nagar, Hyderabad, Telangana",
+          "target_address": "Lig-b-543 A S Rao Nagar, Hyderabad, Andhra Pradesh"
+        }
+      ],
+      "missing_target_address": [
+        {
+          "s1": "S1-100358069",
+          "target": "S2-667919616",
+          "s1_name": "Systems Anand Mutual Pvt Ltd",
+          "target_name": "Systems Anand Mutual Pvt",
+          "s1_address": "603 Shiv Appts, A Wing, Chincholi Bunder Rd, Malad West, Mumbai, Mumbai City, Maharashtra",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-102061191",
+          "target": "S2-459894657",
+          "s1_name": "Ml International Center",
+          "target_name": "Ml International Center Limited",
+          "s1_address": "No.256/1, Chinniampalayam, Coimbatore, Tamil Nadu",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-104562584",
+          "target": "S3-389982003",
+          "s1_name": "WEH Industries",
+          "target_name": "WEH Center",
+          "s1_address": "Office No.501, 5Th Floor, A Wing Aalind Fortuna, Cts No.1406/12, Chincholi Bunder Road, M, Alad (W), Mumbai, Mumbai City, Maharashtra",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-104723800",
+          "target": "S3-303384130",
+          "s1_name": "MZA Software Limited",
+          "target_name": "MZA S0ftware Limited",
+          "s1_address": "Flat 301, 5-9-805 To 808, Gunfoundry, Nampally, Hyderabad, Telangana",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-106546616",
+          "target": "S2-895381041",
+          "s1_name": "Shiva Hospitality Private Limited",
+          "target_name": "SHIVA HOSPITALITY PRIVATE LIMITED",
+          "s1_address": "Hyderabad, Telangana, 2-30/1/2, Tirumalagiri, Gowthami Nagar, Chandanagar, Rangareddy D",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-106604575",
+          "target": "S3-491448863",
+          "s1_name": "Engineering Industries Private Limited",
+          "target_name": "Engineering Industries Private  Ltd",
+          "s1_address": "2/540, M.H.B., Malviya Nagar, Jaipur, Rajasthan",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-107182783",
+          "target": "S2-219118063",
+          "s1_name": "Brzee Telecommunications Pvt. Ltd.",
+          "target_name": "Brzee Télecommunications Pvt. (Ltd)",
+          "s1_address": "1-11-252/1A To 1D, Alladin Street, Hyderabad, Telangana, Begumpet",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-110453330",
+          "target": "S2-395866299",
+          "s1_name": "Dmr Vidyalaya Partners",
+          "target_name": "Dmr Vidya1aya Partners",
+          "s1_address": "Shop No.14, Shoe Market, Sanjay Palce, Agra, Block No. 4, Uttar Pradesh, Agra",
+          "target_address": ""
+        }
+      ],
+      "typo_like_name": [
+        {
+          "s1": "S1-100358069",
+          "target": "S2-856183792",
+          "s1_name": "Systems Anand Mutual Pvt Ltd",
+          "target_name": "SYSTEMS ANAND MUTUA1 PVT LTD",
+          "s1_address": "603 Shiv Appts, A Wing, Chincholi Bunder Rd, Malad West, Mumbai, Mumbai City, Maharashtra",
+          "target_address": "603 SHIV APPTS, A WING, CHINCHOLI BUNDER RD, MALAD WEST, MUMBAI, महाराष्ट्र"
+        },
+        {
+          "s1": "S1-100358069",
+          "target": "S2-287549799",
+          "s1_name": "Systems Anand Mutual Pvt Ltd",
+          "target_name": "Systems Anand Mutual Pvt",
+          "s1_address": "603 Shiv Appts, A Wing, Chincholi Bunder Rd, Malad West, Mumbai, Mumbai City, Maharashtra",
+          "target_address": "603 SHIV APPTS, A WING, CHINCHOLI BUNDER RD, MALAD WEST, MUMBAI, Maharashtra"
+        },
+        {
+          "s1": "S1-100902803",
+          "target": "S3-145337959",
+          "s1_name": "Sai Business Private Limited",
+          "target_name": "Sai Business Private Ltd",
+          "s1_address": "Ist Floor, Jawari Bhawan, High Court Colony, Jodhpur, Rajasthan",
+          "target_address": "High Court Colony, Ist Floor, RJ, Jawari Bhawan, Jodhpur"
+        },
+        {
+          "s1": "S1-10103983",
+          "target": "S2-538529164",
+          "s1_name": "Bright Products",
+          "target_name": "Bright Ponedodcts",
+          "s1_address": "94B, Pandey House, August Kranti Marg, Opp Cumbala Hill Hospital, Mumbai, Mumbai City, Maharashtra",
+          "target_address": "94B, PANDEY HOUSE, AUGUST KRANTI MARG, OPP CUMBALA HILL HOSPITAL, MUMBAI, Maharashtra"
+        },
+        {
+          "s1": "S1-101135446",
+          "target": "S2-840796678",
+          "s1_name": "Life Services Pvt Ltd",
+          "target_name": "Sri Life Services  Pvt Limited",
+          "s1_address": "38 Zakaria Streetground Floor, Kolkata, South 24 Parganas, West Bengal",
+          "target_address": "H.NO 38 ZAKARIA STREETGROUND FLOOR, KOLKATA, West Bengal"
+        },
+        {
+          "s1": "S1-101135446",
+          "target": "S3-669347355",
+          "s1_name": "Life Services Pvt Ltd",
+          "target_name": "Dr Life Services Pvt Ltd.",
+          "s1_address": "38 Zakaria Streetground Floor, Kolkata, South 24 Parganas, West Bengal",
+          "target_address": "38 Zakaria Streetground Floor, পশ্চিমবঙ্গ, Kolkata, South 24 Parganas"
+        },
+        {
+          "s1": "S1-101463164",
+          "target": "S3-62913119",
+          "s1_name": "Kwality Confectionery Private Limited",
+          "target_name": "Kwality Confectionery Limited Service",
+          "s1_address": "Anand Niwas Plot No 3S T Road Opp Hanuman Temple Chembur, Mumbai, Mumbai City, Maharashtra",
+          "target_address": "Block B-912 Anand Niwas Plft No 3S T Road Opp Hanuman Temple Chembur, NULL, Mumbai City, Mumbai, महाराष्ट्र"
+        },
+        {
+          "s1": "S1-101463164",
+          "target": "S2-797695473",
+          "s1_name": "Kwality Confectionery Private Limited",
+          "target_name": "Kwality Coectirnesr Private (Limited)",
+          "s1_address": "Anand Niwas Plot No 3S T Road Opp Hanuman Temple Chembur, Mumbai, Mumbai City, Maharashtra",
+          "target_address": "ANAND NIWAS PLOT NO 3S T ROAD OPP HANUMAN TEMPLE CHEMBUR, MUMBAI, Maharashtra"
+        }
+      ],
+      "FP_other": [
+        {
+          "s1": "S1-117726095",
+          "target": "S3-773087053",
+          "s1_name": "North Investments Pvt Ltd",
+          "target_name": "North Investments Pvt Ltd.",
+          "s1_address": "No 44, 6Th Main 46Th Cross, Near Biba Show Room, Bangalore South, Bangalore, Karnataka",
+          "target_address": "Flat No 472, 3Rd Floor, Sai Galleria Road No 36, Jubilee Hills, Hyderabad, తెలంగాణ"
+        },
+        {
+          "s1": "S1-118908006",
+          "target": "S3-500904566",
+          "s1_name": "South West Delhi India Private Limited",
+          "target_name": "South West Delhi India Private [Limited]",
+          "s1_address": "E-75, Ground Floor, Anand Niketan, South West Delhi, Delhi",
+          "target_address": "Door No 257 A, S/f Right Side, Vill-chatarpur Near Ram Lila Chowk, Fatehpur Beri, South West Delhi, DL"
+        },
+        {
+          "s1": "S1-126886727",
+          "target": "S2-562530147",
+          "s1_name": "Pioneer & Brothers Ltd",
+          "target_name": "Pioneer &  Brothers Ltd",
+          "s1_address": "#13, 1St Floor Munni Reddy Building, Carmelaram Po Doddakannelli, Bangalore, Karnataka",
+          "target_address": "NO 326 3052, GALI NO.37 FIRST FLOR, BEADON PURA, KAROL BAGH, NEW DELHI, दिल्ली"
+        },
+        {
+          "s1": "S1-131052321",
+          "target": "S2-660829443",
+          "s1_name": "Silver Enterprises Pvt Ltd",
+          "target_name": "Silver  Enterprises Pvt Ltd",
+          "s1_address": "B-12, 2Nd Floor, Subhash Chowk Laxmi Nagar, Delhi, East Delhi, Delhi",
+          "target_address": "H.NO 36 C/O MISHRILAL TOSHNIWAL, H.NO.5-5-52/P PLOT NO.3, AURANGABAD, Maharashtra"
+        },
+        {
+          "s1": "S1-133181361",
+          "target": "S2-64566175",
+          "s1_name": "Kissan & Brothers Pvt. Ltd.",
+          "target_name": "Kissan Brothers Pvt Ltd",
+          "s1_address": "Plot No. 34, Near Regal Rolling Shutters, Sarada Nagar, Chillakur Post, Kotipalem, Village, East Gudur, Andhra Pradesh",
+          "target_address": "NO #34 PLOT NO, 27.ANNEXE., 10 MUTHIAH NAGAR, CHIDAMBARAM NORTH, Tamil Nadu"
+        },
+        {
+          "s1": "S1-135715940",
+          "target": "S3-533144895",
+          "s1_name": "Saffron International School Private Limited",
+          "target_name": "Saffron International School Private [Limited]",
+          "s1_address": "G.F.-1, Shakti Arcade, Op Auda Water Tank Science City Rd, Sola, Ahmedabad, Gujarat",
+          "target_address": "WB, Ground Floor, Howrah, 0082 Ramkrishnapur Lane Block A"
+        },
+        {
+          "s1": "S1-139657887",
+          "target": "S3-783828800",
+          "s1_name": "Samarth Brothers Pvt. Ltd.",
+          "target_name": "Samarth Brothers Pvt. (Ltd.)",
+          "s1_address": "Tamil Nadu, Chennai, Shanmugham Street, 10",
+          "target_address": "#8Th. Floor Tower 1, K.v.rangareddy, Seri Lingampally, Andhra Pradesh"
+        },
+        {
+          "s1": "S1-139674812",
+          "target": "S3-492014739",
+          "s1_name": "Gorakhpur Industries Private Limited",
+          "target_name": "GORAKHPUR INDUSTRIES PRIVATE LIMITED",
+          "s1_address": "Uttar Pradesh, Gorakhpur, H. N. 151 Shivpur, Shahbazganj, Gorakhpur, Gorakhpur, C/O Arun Kumar Pandey",
+          "target_address": "H.no ##886, Jatepur South In Front Of Sindhi Dharmshala, Gorakhpur, UP"
+        }
+      ]
+    }
+  },
+  "runtime": {
+    "total_seconds": 206.117,
+    "target_scan_seconds": 174.594,
+    "target_rows_streamed": 10320219,
+    "final_prediction_ids_by_mode": {
+      "baseline": 2899,
+      "addr_exact_name_sim_085": 4011,
+      "addr_exact_name_sim_080": 4351,
+      "addr_exact_name_sim_075": 4646,
+      "name_exact_addr_overlap_040": 7764,
+      "combined_085": 8876,
+      "combined_080": 9216,
+      "combined_075": 9511
+    }
+  },
+  "limitations": [
+    "Single deterministic holdout sample; rule thresholds were prespecified, but sampling uncertainty remains.",
+    "Training labels can contain noise; string-based categories are diagnostic proxies, not adjudication.",
+    "Country validation covers only countries present in supplied training data."
+  ]
+}

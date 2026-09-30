@@ -1,0 +1,664 @@
+{
+  "title": "Submission #1 held-out reproduction and controlled rule experiments",
+  "sample": {
+    "split_seed": 20261020,
+    "sample_seed": 20261022,
+    "holdout_definition": "SHA256(split_seed + NUL + S1 ID) integer mod 5 == 1; this bucket is disjoint from other hash buckets",
+    "sample_method": "population-proportional stratified bottom-k by match class x country within holdout pool",
+    "sample_size": 10000,
+    "holdout_population": 442138,
+    "stratum_population": {
+      "multi/India": 157444,
+      "multi/US": 236179,
+      "one/India": 9364,
+      "one/US": 14545,
+      "zero/India": 9744,
+      "zero/US": 14862
+    },
+    "stratum_sample": {
+      "multi/India": 3561,
+      "multi/US": 5342,
+      "one/India": 212,
+      "one/US": 329,
+      "zero/India": 220,
+      "zero/US": 336
+    },
+    "countries": [
+      "India",
+      "US"
+    ],
+    "ordered_ids_sha256": "adc06db822ca9eeaee08139cb407dec82ba6b9e27e69e78a3033fe359b3d0e21",
+    "true_links": 34639,
+    "sample_selection_storage": "SQLite temporary file; full ground truth and holdout pool are not retained in Python memory"
+  },
+  "submission1_rules": "same-country exact normalized name+address OR exact normalized name+approved abbreviation-address; only if neither produces a match, emit normalized-name posting iff unique across S2+S3",
+  "experiments": {
+    "baseline": {
+      "macro_f0_5": 0.2245320592075623,
+      "micro_precision": 0.8907563025210085,
+      "micro_recall": 0.07650336326106412,
+      "tp": 2650,
+      "fp": 325,
+      "fn": 31989,
+      "predicted_links": 2975,
+      "zero_match_entities": 556,
+      "zero_match_correct_empty": 525,
+      "zero_match_accuracy": 0.9442446043165468,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8903,
+          "macro_f0_5": 0.183120363032194,
+          "tp": 2560,
+          "fp": 266,
+          "fn": 31538
+        },
+        "zero": {
+          "entities": 556,
+          "macro_f0_5": 0.9442446043165468,
+          "tp": 0,
+          "fp": 31,
+          "fn": 0
+        },
+        "one": {
+          "entities": 541,
+          "macro_f0_5": 0.16635859519408502,
+          "tp": 90,
+          "fp": 28,
+          "fn": 451
+        }
+      },
+      "candidate_or_prediction_ids": 2975,
+      "per_s1": {
+        "zero": 7085,
+        "one": 2861,
+        "multi": 54
+      }
+    },
+    "addr_exact_name_sim_095": {
+      "macro_f0_5": 0.23254901153627935,
+      "micro_precision": 0.8955887019993652,
+      "micro_recall": 0.08146886457461243,
+      "tp": 2822,
+      "fp": 329,
+      "fn": 31817,
+      "predicted_links": 3151,
+      "zero_match_entities": 556,
+      "zero_match_correct_empty": 525,
+      "zero_match_accuracy": 0.9442446043165468,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8903,
+          "macro_f0_5": 0.19201281763032613,
+          "tp": 2731,
+          "fp": 270,
+          "fn": 31367
+        },
+        "zero": {
+          "entities": 556,
+          "macro_f0_5": 0.9442446043165468,
+          "tp": 0,
+          "fp": 31,
+          "fn": 0
+        },
+        "one": {
+          "entities": 541,
+          "macro_f0_5": 0.16820702402957485,
+          "tp": 91,
+          "fp": 28,
+          "fn": 450
+        }
+      },
+      "candidate_or_prediction_ids": 3151,
+      "per_s1": {
+        "zero": 6982,
+        "one": 2895,
+        "multi": 123
+      }
+    },
+    "name_exact_addr_overlap_080": {
+      "macro_f0_5": 0.34566365653644476,
+      "micro_precision": 0.940622737146995,
+      "micro_recall": 0.1500043303790525,
+      "tp": 5196,
+      "fp": 328,
+      "fn": 29443,
+      "predicted_links": 5524,
+      "zero_match_entities": 556,
+      "zero_match_correct_empty": 524,
+      "zero_match_accuracy": 0.9424460431654677,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8903,
+          "macro_f0_5": 0.31704330735307734,
+          "tp": 5086,
+          "fp": 268,
+          "fn": 29012
+        },
+        "zero": {
+          "entities": 556,
+          "macro_f0_5": 0.9424460431654677,
+          "tp": 0,
+          "fp": 32,
+          "fn": 0
+        },
+        "one": {
+          "entities": 541,
+          "macro_f0_5": 0.2033271719038817,
+          "tp": 110,
+          "fp": 28,
+          "fn": 431
+        }
+      },
+      "candidate_or_prediction_ids": 5524,
+      "per_s1": {
+        "zero": 5386,
+        "one": 3846,
+        "multi": 768
+      }
+    }
+  },
+  "marginal_vs_baseline": {
+    "addr_exact_name_sim_095": {
+      "added_true_links": 172,
+      "added_false_links": 4,
+      "added_links": 176
+    },
+    "name_exact_addr_overlap_080": {
+      "added_true_links": 2546,
+      "added_false_links": 3,
+      "added_links": 2549
+    }
+  },
+  "baseline_error_groups": {
+    "false_positive_links": {
+      "other": 325
+    },
+    "false_negative_links": {
+      "name_variation_same_address": 3012,
+      "typo_like_name": 13882,
+      "address_variation_same_name": 4587,
+      "other_or_candidate_miss": 7274,
+      "missing_target_address": 1390,
+      "name_order_or_punctuation": 1844
+    },
+    "examples": {
+      "name_variation_same_address": [
+        {
+          "s1": "S1-100006832",
+          "target": "S2-242079905",
+          "s1_name": "Indian Construction",
+          "target_name": "इंडियन कंस्ट्रक्शन",
+          "s1_address": "Panigaon Banger, Mathura, Uttar Pradesh",
+          "target_address": "PANIGAON BANGER, MATHURA, Uttar Pradesh"
+        },
+        {
+          "s1": "S1-100006832",
+          "target": "S2-287166034",
+          "s1_name": "Indian Construction",
+          "target_name": "Indian Construction Córporation",
+          "s1_address": "Panigaon Banger, Mathura, Uttar Pradesh",
+          "target_address": "PANIGAON BANGER, MATHURA, Uttar Pradesh"
+        },
+        {
+          "s1": "S1-102053105",
+          "target": "S3-384059122",
+          "s1_name": "Gmt Beverages Private Limited",
+          "target_name": "Korhalo Sys trading as Gmt Beverages Private Limited",
+          "s1_address": "Shop No. 107, Block B, 2Nd Floor, Corporate House, Plot No. 169, Rnt Marg, Indore, Madhya Pradesh",
+          "target_address": "Shop No. 107, Block B, 2Nd Floor, Corporate House, Plot No. 169, Rnt Marg, Indore, Madhya Pradesh"
+        },
+        {
+          "s1": "S1-10278554",
+          "target": "S2-710759739",
+          "s1_name": "Circle Services Private Limited",
+          "target_name": "Dr CIRCLE PRIVATE LIMITED  SERVICES",
+          "s1_address": "B 52, 11Th Street Anna Nagar, Chennai, Tamil Nadu",
+          "target_address": "B 52, 11TH STREET ANNA NAGAR, CHENNAI, Tamil Nadu"
+        },
+        {
+          "s1": "S1-104182517",
+          "target": "S2-197797266",
+          "s1_name": "Seven Services Private Limited",
+          "target_name": "सेवन सर्विसेज प्राइवेट लिमिटेड",
+          "s1_address": "130, Begumpura, Ujjain, Ujjain, Madhya Pradesh",
+          "target_address": "##130, BEGUMPURA, UJJAIN, UJJAIN, Madhya Pradesh"
+        },
+        {
+          "s1": "S1-105693537",
+          "target": "S2-171513397",
+          "s1_name": "Ukay Architecture LLP",
+          "target_name": "UKAY LLP ARCHITECTURE",
+          "s1_address": "168 Gangotri Nagar, Jaipur, Rajasthan",
+          "target_address": "168 GANGOTRI NAGAR, JAIPUR, Rajasthan"
+        },
+        {
+          "s1": "S1-107897587",
+          "target": "S2-738274445",
+          "s1_name": "Lucknow Services Private Limited",
+          "target_name": "Lucknow Sedrcioces Private Limited",
+          "s1_address": "163 Sect L, Aliganj Scheme, Lucknow, Uttar Pradesh",
+          "target_address": "163 SECT L, ALIGANJ SCHEME, LUCKNOW, Uttar Pradesh"
+        },
+        {
+          "s1": "S1-108534475",
+          "target": "S3-189357790",
+          "s1_name": "Shakti Infra Pvt Ltd",
+          "target_name": "Yumaaria formerly known as Shakti Infra Pvt Ltd",
+          "s1_address": "A1-602, Phase 1, Kanchanban Society Shivtirth Nagar, Kothrud, Pune, Maharashtra",
+          "target_address": "A1-602, Phase 1, Kanchanban Society Shivtirth Nagar, Kothrud, Pune, Maharashtra"
+        }
+      ],
+      "typo_like_name": [
+        {
+          "s1": "S1-100006832",
+          "target": "S3-758367796",
+          "s1_name": "Indian Construction",
+          "target_name": "lndian lndian Construction",
+          "s1_address": "Panigaon Banger, Mathura, Uttar Pradesh",
+          "target_address": "Panigaon Banger, Mathura, UP"
+        },
+        {
+          "s1": "S1-101214602",
+          "target": "S3-644985342",
+          "s1_name": "Fortune Developers Private Limited",
+          "target_name": "Fortune Developers Private",
+          "s1_address": "Kh City, Door No 663 C, Palakkad Road Manjalungal, Kalladipatta Po, Pattambi, Palakkad, Kerala",
+          "target_address": "H.no 111 Kh City, Door No 663 C, Palakkad Road Manjalungal, Kalladipatta Po, Pattambi, Palakkad, കേരളം"
+        },
+        {
+          "s1": "S1-101214602",
+          "target": "S3-558594487",
+          "s1_name": "Fortune Developers Private Limited",
+          "target_name": "Dr fortune developers private limited",
+          "s1_address": "Kh City, Door No 663 C, Palakkad Road Manjalungal, Kalladipatta Po, Pattambi, Palakkad, Kerala",
+          "target_address": "KL, Palakkad, Pattambi, Door No 663 C, Palakkad Road Manjalungal, Kalladipatta Po, H.no 111 Kh City"
+        },
+        {
+          "s1": "S1-101214602",
+          "target": "S3-859793813",
+          "s1_name": "Fortune Developers Private Limited",
+          "target_name": "Fortune  Developers Private",
+          "s1_address": "Kh City, Door No 663 C, Palakkad Road Manjalungal, Kalladipatta Po, Pattambi, Palakkad, Kerala",
+          "target_address": "H.no 111 Kh City, Door No 663 C, Palakkad Road Manjalungal, Kalladipatta Po, Palakkad, Pattambi, KL"
+        },
+        {
+          "s1": "S1-101475055",
+          "target": "S2-862000725",
+          "s1_name": "Rsp Roadlines LLP",
+          "target_name": "Rsp Roadlines  L.L.P.",
+          "s1_address": "Dheeraj Pooja Chsl, Opp. Infant Jesus School Chincholi Bunder Road, Malad (W), C-610, Mumbai, Mumbai City, Maharashtra",
+          "target_address": "C-610, DHEERAJ POOJA CHSL, OPP. INFANT JESUS SCHOOL CHINCHOLI BUNDER ROAD, MALAD (W), MUMBAI, Maharashtra"
+        },
+        {
+          "s1": "S1-101475055",
+          "target": "S2-370022703",
+          "s1_name": "Rsp Roadlines LLP",
+          "target_name": "Rsp Róadlines LLP",
+          "s1_address": "Dheeraj Pooja Chsl, Opp. Infant Jesus School Chincholi Bunder Road, Malad (W), C-610, Mumbai, Mumbai City, Maharashtra",
+          "target_address": "C-610, DHEERAJ POOJA CHSL, OPP. INFANT JESUS SCHOOL CHINCHOLI BUNDER ROAD, MALAD (W), MUMBAI, महाराष्ट्र"
+        },
+        {
+          "s1": "S1-101475055",
+          "target": "S2-134141774",
+          "s1_name": "Rsp Roadlines LLP",
+          "target_name": "RSP ROAILISES  LLP",
+          "s1_address": "Dheeraj Pooja Chsl, Opp. Infant Jesus School Chincholi Bunder Road, Malad (W), C-610, Mumbai, Mumbai City, Maharashtra",
+          "target_address": "C-610, DHEERAJ POOJA CHSL, OPP. INFANT JESUS SCHOOL CHINCHOLI BUNDER ROAD, MALAD (W), MUMBAI, महाराष्ट्र"
+        },
+        {
+          "s1": "S1-101686204",
+          "target": "S3-729892877",
+          "s1_name": "Scaleup Erectors Pvt Ltd",
+          "target_name": "Scaleup Erectors Pvt Limited",
+          "s1_address": "Delhi, South Delhi, D-31 F/F, Delhi, Press Enclave Malviya Nagar Extn",
+          "target_address": "D-31 F/f, South Delhi, Gurugram, Press Enclave Malviya Nagar Extn, DL"
+        }
+      ],
+      "address_variation_same_name": [
+        {
+          "s1": "S1-101214602",
+          "target": "S3-161196571",
+          "s1_name": "Fortune Developers Private Limited",
+          "target_name": "Fortune  Developers Private Limited",
+          "s1_address": "Kh City, Door No 663 C, Palakkad Road Manjalungal, Kalladipatta Po, Pattambi, Palakkad, Kerala",
+          "target_address": "Dor No 111 Kh City, Pattambi, Palakkad, കേരളം"
+        },
+        {
+          "s1": "S1-101686204",
+          "target": "S2-438865250",
+          "s1_name": "Scaleup Erectors Pvt Ltd",
+          "target_name": "SCALEUP ERECTORS PVT LTD",
+          "s1_address": "Delhi, South Delhi, D-31 F/F, Delhi, Press Enclave Malviya Nagar Extn",
+          "target_address": "D-#31 F/F, PRESS ENCLAVE MALVIYA NAGAR EXTN, DELHI, Delhi"
+        },
+        {
+          "s1": "S1-102053105",
+          "target": "S3-595125330",
+          "s1_name": "Gmt Beverages Private Limited",
+          "target_name": "Gmt-Beverages Private Limited",
+          "s1_address": "Shop No. 107, Block B, 2Nd Floor, Corporate House, Plot No. 169, Rnt Marg, Indore, Madhya Pradesh",
+          "target_address": "Indore, Block B, 2Nd Floor, Corporate House, Plot No. 169, Rnt Marg, MP, Indore, Shop No. 107"
+        },
+        {
+          "s1": "S1-102053105",
+          "target": "S3-10421531",
+          "s1_name": "Gmt Beverages Private Limited",
+          "target_name": "gmt beverages private limited",
+          "s1_address": "Shop No. 107, Block B, 2Nd Floor, Corporate House, Plot No. 169, Rnt Marg, Indore, Madhya Pradesh",
+          "target_address": "107, Block B, 2Nd Floor, Corporate House, Plot No. 169, Rnt Marg, Indore, MP"
+        },
+        {
+          "s1": "S1-102419697",
+          "target": "S2-515519908",
+          "s1_name": "Pancham Nidhi (India) Private Limited",
+          "target_name": "Pancham Nidhi (India) Private Limited",
+          "s1_address": "First Floor, Shop No. 19, Nwa Market Club Road, Punjabi Bagh, Delhi, West Delhi, Delhi",
+          "target_address": "FIRST FLOOR, SHOP NO. 19, NWA MARKET CLUB ROAD, PUNJABI BAGH, DELHI, दिल्ली"
+        },
+        {
+          "s1": "S1-102419697",
+          "target": "S2-325249636",
+          "s1_name": "Pancham Nidhi (India) Private Limited",
+          "target_name": "PANCHAM NIDHI (INDIA) PRIVATE LIMITED",
+          "s1_address": "First Floor, Shop No. 19, Nwa Market Club Road, Punjabi Bagh, Delhi, West Delhi, Delhi",
+          "target_address": "FIRST FLOOR, SHOP NO. 19, NWA MARKET CLUB ROAD, PUNJABI BAGH, DELHI, Delhi"
+        },
+        {
+          "s1": "S1-102419697",
+          "target": "S3-11336508",
+          "s1_name": "Pancham Nidhi (India) Private Limited",
+          "target_name": "pancham nidhi (india) private limited",
+          "s1_address": "First Floor, Shop No. 19, Nwa Market Club Road, Punjabi Bagh, Delhi, West Delhi, Delhi",
+          "target_address": "5-664 First Floor, Shop No. 19, Nwa Market Club Road, Punjabi Bagh, West Delhi, Delhi, DL"
+        },
+        {
+          "s1": "S1-102419697",
+          "target": "S3-671560035",
+          "s1_name": "Pancham Nidhi (India) Private Limited",
+          "target_name": "Pancham-Nidhi-(India) Private Limited",
+          "s1_address": "First Floor, Shop No. 19, Nwa Market Club Road, Punjabi Bagh, Delhi, West Delhi, Delhi",
+          "target_address": "#5-664 First Floor, Shop No. 19, Nwa Market Club Road, Punjabi Bagh, Delhi, West Delhi, DL"
+        }
+      ],
+      "other_or_candidate_miss": [
+        {
+          "s1": "S1-101475055",
+          "target": "S3-192007912",
+          "s1_name": "Rsp Roadlines LLP",
+          "target_name": "Rsp LLP  Service",
+          "s1_address": "Dheeraj Pooja Chsl, Opp. Infant Jesus School Chincholi Bunder Road, Malad (W), C-610, Mumbai, Mumbai City, Maharashtra",
+          "target_address": "Mumbai, Mumbai Suburban, MH, C-610"
+        },
+        {
+          "s1": "S1-101686204",
+          "target": "S2-312777340",
+          "s1_name": "Scaleup Erectors Pvt Ltd",
+          "target_name": "Scaleup Pvt Ltd (Service)",
+          "s1_address": "Delhi, South Delhi, D-31 F/F, Delhi, Press Enclave Malviya Nagar Extn",
+          "target_address": "D-#31 F/F, PRESS ENCLAVE MALVIYA NAGAR EXTN, DELHI, Delhi"
+        },
+        {
+          "s1": "S1-101796144",
+          "target": "S3-301412573",
+          "s1_name": "AF Hospitality Limited",
+          "target_name": "AF Limited Partners",
+          "s1_address": "Unit No 11 And 12, 2Nd Floor, Emmar, The Palm Square, Golf Course Extn. Road, Sector-66, Bhondsi, Gurgaon, Haryana",
+          "target_address": "117 Unit No 11 And 12, HR, 2Nd Floor, Emmar, The Palm Square, Golf Course Extn. Road, Sector-66, Bhondsi, Gurgaon"
+        },
+        {
+          "s1": "S1-102510986",
+          "target": "S2-722129819",
+          "s1_name": "Galaxy Global Private Limited",
+          "target_name": "गैलेक्सी ग्लोबल प्राइवेट लिमिटेड",
+          "s1_address": "C/O Md. Mustafa Kamal, Vill- Abhuar Tola - Kadampura, Panch-Kadampura, Block, Kishanpur, Supaul, Saharsa, Bihar",
+          "target_address": "C/O MD. MUSTAFA KAMAL, SUPAUL, PATNA, Bihar"
+        },
+        {
+          "s1": "S1-102510986",
+          "target": "S3-372198125",
+          "s1_name": "Galaxy Global Private Limited",
+          "target_name": "गैलेक्सी ग्लोबल प्राइवेट लिमिटेड",
+          "s1_address": "C/O Md. Mustafa Kamal, Vill- Abhuar Tola - Kadampura, Panch-Kadampura, Block, Kishanpur, Supaul, Saharsa, Bihar",
+          "target_address": "C/o Md. Mustafa Kmal, Vill- Abhuar Tola - Kadampura, Panch-kadampura, Block, Kishanpur, Supaul, Saharsa, BR"
+        },
+        {
+          "s1": "S1-103744595",
+          "target": "S3-646185392",
+          "s1_name": "Ak Suppliers (India) Private Limited",
+          "target_name": "aksuppliersindia.com",
+          "s1_address": "Room 726, 7Th Floor, Megal Mall 63/2C, The Mall, Nayaganj, Kanpur Nagar, Uttar Pradesh",
+          "target_address": "Room 72, Kanpur Nagar, UP"
+        },
+        {
+          "s1": "S1-103913410",
+          "target": "S3-880816881",
+          "s1_name": "Balaji Foundation",
+          "target_name": "Balaji Center",
+          "s1_address": "Plot No 30, Vivekanand Industrial Park Plot Opp. Vivekanand Garment Park, B/H Shahwadi Vil, Lage, Narol, Ahmedabad, Gujarat",
+          "target_address": "H.no 30, Narol Ahmedabad, GJ"
+        },
+        {
+          "s1": "S1-10400752",
+          "target": "S3-359279394",
+          "s1_name": "Raj Shiv Consultants Private Limited",
+          "target_name": "राज शिव कंसल्टेंट्स प्राइवेट लिमिटेड",
+          "s1_address": "2039, Old Anaj Mandi, Narela, Delhi",
+          "target_address": "Narela, 2039, DL, Old Anaj Mandi"
+        }
+      ],
+      "missing_target_address": [
+        {
+          "s1": "S1-101686204",
+          "target": "S3-117154917",
+          "s1_name": "Scaleup Erectors Pvt Ltd",
+          "target_name": "Scaleup Erectors Pvt Ltd",
+          "s1_address": "Delhi, South Delhi, D-31 F/F, Delhi, Press Enclave Malviya Nagar Extn",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-10400752",
+          "target": "S3-845522888",
+          "s1_name": "Raj Shiv Consultants Private Limited",
+          "target_name": "raj shiv consultants private limited",
+          "s1_address": "2039, Old Anaj Mandi, Narela, Delhi",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-106795171",
+          "target": "S2-733877206",
+          "s1_name": "Construction Verve Softech Pvt Ltd",
+          "target_name": "Construction Verve Softech",
+          "s1_address": "Premises No. 502 & 503, 5Th Floor Westwood Estates, Phase 1, Kaspate Wasti Road, Mulashi, Pune, Maharashtra",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-107246849",
+          "target": "S3-227111557",
+          "s1_name": "Vidhya Capital Private Limited",
+          "target_name": "Smt Vidhya Cápital Private Limited (ID: 55499)",
+          "s1_address": "24A, Shakespeare Sarani, Parijaat Building, 02Nd Floor, Room No 21, Kolkata, Kolkata, Howrah, West Bengal",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-126695792",
+          "target": "S3-667636737",
+          "s1_name": "New Industries Private Limited",
+          "target_name": "New Industries Limited Center",
+          "s1_address": "71 Maker Towers Hcuffe Parade, Mumbai, Maharashtra",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-127129753",
+          "target": "S2-305505729",
+          "s1_name": "Lat Development Limited",
+          "target_name": "M/s Lat Development Limited",
+          "s1_address": "Site No 18 & 19 Iii Rd Phase, S R Avenue, Vilankuruchi, Coimbatore, Tamil Nadu",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-128000950",
+          "target": "S2-847891772",
+          "s1_name": "PO Services Pvt Ltd",
+          "target_name": "PO SERVICES PVT",
+          "s1_address": "C-4, Panchawati Colony Talawali Chanda, A.B. Road, Indore, Madhya Pradesh",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-130022256",
+          "target": "S3-278456578",
+          "s1_name": "Fun Sun Private Limited",
+          "target_name": "Fun Sun Pridvate Limited",
+          "s1_address": "3Mig Block No 3 Flat No 20 B H Colony Bahadurpur, Patna, Bihar, Patna",
+          "target_address": ""
+        }
+      ],
+      "name_order_or_punctuation": [
+        {
+          "s1": "S1-101686204",
+          "target": "S2-129085001",
+          "s1_name": "Scaleup Erectors Pvt Ltd",
+          "target_name": "Scaleup Ltd Pvt Erectors",
+          "s1_address": "Delhi, South Delhi, D-31 F/F, Delhi, Press Enclave Malviya Nagar Extn",
+          "target_address": "D-#31 F/F, PRESS ENCLAVE MALVIYA NAGAR EXTN, DELHI, Delhi"
+        },
+        {
+          "s1": "S1-105264058",
+          "target": "S3-373563215",
+          "s1_name": "Shree Amar Private Limited",
+          "target_name": "Shree Limited Private Amar",
+          "s1_address": "Satyagrah Chhavni Chsl, Lane 5 B No-149, Nr Fun Republic, Sattelite Road, Ahmadabad City, Ahmedabad, Gujarat",
+          "target_address": "Satyagrah Chhavni Chsl, Lane 5 B No-149, Nr Fun Republic, Sattelite Road, Ahmadabad City, Ahmedabad, GJ"
+        },
+        {
+          "s1": "S1-105264058",
+          "target": "S3-664504744",
+          "s1_name": "Shree Amar Private Limited",
+          "target_name": "Shree Limited Private Amar",
+          "s1_address": "Satyagrah Chhavni Chsl, Lane 5 B No-149, Nr Fun Republic, Sattelite Road, Ahmadabad City, Ahmedabad, Gujarat",
+          "target_address": "Satyagrah Chhavni Chsl, Ahmadabad City, Ahmedabad, ગુજરાત"
+        },
+        {
+          "s1": "S1-106795171",
+          "target": "S2-811731243",
+          "s1_name": "Construction Verve Softech Pvt Ltd",
+          "target_name": "CONSTRUCTION VERVE LTD PVT SOFTECH",
+          "s1_address": "Premises No. 502 & 503, 5Th Floor Westwood Estates, Phase 1, Kaspate Wasti Road, Mulashi, Pune, Maharashtra",
+          "target_address": "PREMISES NO. ##502 & 503, 5TH FLOOR WESTWOOD ESTATES, PHASE 1, KASPATE WASTI ROAD, MULASHI, महाराष्ट्र"
+        },
+        {
+          "s1": "S1-108534475",
+          "target": "S3-508912552",
+          "s1_name": "Shakti Infra Pvt Ltd",
+          "target_name": "Pvt Shakti Infra [Ltd]",
+          "s1_address": "A1-602, Phase 1, Kanchanban Society Shivtirth Nagar, Kothrud, Pune, Maharashtra",
+          "target_address": "A1-602, Pune, MH"
+        },
+        {
+          "s1": "S1-108921776",
+          "target": "S3-698650748",
+          "s1_name": "Gupta Industrial Pvt Ltd",
+          "target_name": "Gupta Pvt  Industrial Ltd",
+          "s1_address": "Flat No. C 2004, Mahindra Windchimes, Survey No. 37/2A, Arekere Village, Bangalore South, Bangalore, Karnataka",
+          "target_address": "Door No 272 Flat No. C 2004, Bangalore South, Bangalore, ಕರ್ನಾಟಕ"
+        },
+        {
+          "s1": "S1-115348972",
+          "target": "S2-903123849",
+          "s1_name": "Super Constructions Limited",
+          "target_name": "limited super constructions",
+          "s1_address": "Sy No- 230/A, 231/A, Flat, No- D103, Blossom Heights, Patancheru, Medak, Telangana",
+          "target_address": "H.NO 817 SY NO- 230/A, PATANCHERU, MEDAK, Telangana"
+        },
+        {
+          "s1": "S1-119390392",
+          "target": "S2-636979853",
+          "s1_name": "India Poabs Steelco Private Limited",
+          "target_name": "PRIVATE INDIA POABS STEELCO LIMITED",
+          "s1_address": "Sunrise Tower, Bholenath Ngr Kharwali Ng, Thane, Maharashtra, A/104, Thane",
+          "target_address": "DOOR NO 592 A/104, SUNRISE TOWER, BHOLENATH NGR KHARWALI NG, THANE, Maharashtra"
+        }
+      ],
+      "FP_other": [
+        {
+          "s1": "S1-115348972",
+          "target": "S3-108344092",
+          "s1_name": "Super Constructions Limited",
+          "target_name": "Super Constructions Limited",
+          "s1_address": "Sy No- 230/A, 231/A, Flat, No- D103, Blossom Heights, Patancheru, Medak, Telangana",
+          "target_address": "Surat, H.no 528 R.j.d Business Hub-b, Surat, ગુજરાત"
+        },
+        {
+          "s1": "S1-119394165",
+          "target": "S3-686639514",
+          "s1_name": "Rajendra Agrofoods LLP",
+          "target_name": "Rajendra Agrofoods LLP",
+          "s1_address": "No.619, 2Nd G Cross Hrbr Layout, Kalyan Nagar, Bangalore, Karnataka",
+          "target_address": "No. 11, Nungambakkam High Road, Chennai, TN"
+        },
+        {
+          "s1": "S1-127717792",
+          "target": "S3-619075528",
+          "s1_name": "Sky Construction Limited",
+          "target_name": "Sky Construction Limited",
+          "s1_address": "5001/A Gidc Vatva Phase Iv, Ahmedabad, Gujarat",
+          "target_address": "Xxiii/1379 Warriam Road, Cochin, Alappuzha, KL"
+        },
+        {
+          "s1": "S1-134146576",
+          "target": "S2-325255362",
+          "s1_name": "Amazing Educational Society",
+          "target_name": "Amazing-Educational  Society",
+          "s1_address": "C/O Shri Shiv Appa Sattu, Jable Pujari, Hatkanangale, Kolhapur, Maharashtra",
+          "target_address": "54/A , FLATNO.202 DHANARAJU APARTMENTS, VENGAL RAO NAGAR, S.R.NAGAR, Telangana"
+        },
+        {
+          "s1": "S1-137001128",
+          "target": "S2-380373759",
+          "s1_name": "Jai International School",
+          "target_name": "Jai International ((School))",
+          "s1_address": "C-3303, D B Woods, Krishna Vatika Marg, Gokuldham, Dindoshi, Goregaon (East), Mumbai, Mumbai City, Maharashtra",
+          "target_address": "H. NO 1-5-315/2/46/1, G FLOOR, ELLAMA TEMPLE RAOD, SURYA NAGAR, OLD ALWAL, HYDERABAD, Telangana"
+        },
+        {
+          "s1": "S1-143149924",
+          "target": "S2-220095146",
+          "s1_name": "Bright Media Limited",
+          "target_name": "Bright Media Limited",
+          "s1_address": "24 Ruby Apartmentstarabai Park Kolhapur, Kolhapur, Maharashtra",
+          "target_address": "B-C-2/36, VIKRANT KHAND GOMTINAGAR, LUCKNOW GOMTINAGAR, उत्तर प्रदेश"
+        },
+        {
+          "s1": "S1-144342238",
+          "target": "S3-882147388",
+          "s1_name": "Shivam Consultants LLP",
+          "target_name": "Shivam Consultants LLP",
+          "s1_address": "6B Clive Rowps Hare Street, Kolkata, Calcutta, West Bengal",
+          "target_address": "Office No. 13, Thrissur, KL"
+        },
+        {
+          "s1": "S1-15758373",
+          "target": "S2-84647046",
+          "s1_name": "Suvarn Advertising Private Limited",
+          "target_name": "SUVARN ADVERTISING PRIVATE [LIMITED]",
+          "s1_address": "C/O Sow Annapurnabai Sopanrao Nagare, Girgaon, Sy No.1092/1, Tq Basmath, Hingoli, Maharashtra",
+          "target_address": "NO. 13, SATYAM PARK SOCIETY, TALUKA BAVLA, BAVLA, ગુજરાત"
+        }
+      ]
+    }
+  },
+  "runtime": {
+    "total_seconds": 201.268,
+    "target_scan_seconds": 171.082,
+    "target_rows_streamed": 10320219,
+    "peak_candidate_ids_by_mode": {
+      "baseline": 2975,
+      "addr_exact_name_sim_095": 3151,
+      "name_exact_addr_overlap_080": 5524
+    }
+  },
+  "limitations": [
+    "Single deterministic holdout sample; rule thresholds were prespecified, but sampling uncertainty remains.",
+    "Training labels can contain noise; string-based categories are diagnostic proxies, not adjudication.",
+    "Country validation covers only countries present in supplied training data."
+  ]
+}

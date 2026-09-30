@@ -1,15 +1,11 @@
-# Current State (2026-09-26)
+# Current State (2026-09-27)
 
 **Project:** Amazon ML Challenge 2026 — Business Entity Resolution  
-**Root:** `/Users/priyanshujaiswal/Documents/AmazonMLChallenge2026`  
-**Goal:** Diagnose Submission #1 and prepare Submission #2.
+**Root:** Use the current workspace root; older machine-specific path notes are historical.  
+**Goal:** Improve on Submission #1 while preserving the frozen Stage 4 methodology and all project rules.
 
-Sources: Source 1 is the reference; Source 2 and Source 3 are candidates. Use supplied training labels and optimize macro F0.5 (β=0.5; precision weighted more than recall; singletons included). Official PDFs and package README govern. No external lookup/augmentation; preserve `student_resource/`; country is open-set (test includes France).
+Stages 1–4 are complete; Stage 4 is frozen. Submission #1 scored leaderboard F0.5=0.228. The missing original training Source 2 file has been restored and verified. Two disjoint, population-proportional 10,000-S1 holdouts support the same exact-name/address-token-containment rule: macro F0.5 0.34272 vs 0.22020, then 0.34566 vs 0.22453.
 
-Stages 1–3 complete. Stage 4.1–4.7 complete and frozen. Frozen A=Prefix5 ∪ Address2500; operational generator=A plus same-country address token df 2,501–25,000 AND same-country name token df 1–25,000. Stage 4.7 (1,500 S1 / 5,156 links): A 4,959 (96.18%) / 10.91M pairs; B 5,096 (98.84%) / 36.38M; frozen A+HF-address/name 5,023 (97.42%) / 10.97M; A+name-token≤2,500 5,034 (97.63%) / 11.77M. Do not alter without a recorded experiment.
+The newest separate Submission #2 candidate combines exact-name/address containment 0.40 with exact-address/name-similarity 0.75. It scored offline macro F0.5 0.47047 and 0.47395 on two disjoint 10,000-S1 training holdouts; the overlap-only comparator scored 0.41088 and 0.41113. Its test outputs and package are in `experiments/stage5_submission2_combined075/`, and passed the supplied validator with `--check-ids`. No portal score exists. The .40 and .80 packages remain preserved. Test truth is unavailable; 0.80 has not been reached.
 
-Stage 5 is incomplete. Existing scorer validation: threshold 12, F0.5 0.5483, precision 0.9030, recall 0.2510; 17/482 true links were outside candidates, 121/465 scored links cleared threshold. No wiring bug found. Artifacts: `experiments/stage5/`.
-
-Submission #1 is complete: the fast indexed direct-match baseline processed 1,732,544 S1 rows, predicted 510,033 IDs (1,232,937 zero-match rows; 489,960 one-match rows; 9,647 multi-match rows), passed the validator, and scored F0.5=0.228 on the leaderboard. This was not the full frozen Stage 4 + Stage 5 scorer. Outputs are local under ignored `output/`; details are in `experiments/stage5/submission1_fast_baseline/`.
-
-Next: reproduce the exact Submission #1 rules on held-out training data; measure metrics and diagnose false positives/negatives, multilingual failures, missing-address failures, and ambiguous-key cases; then develop feasible higher-recall retrieval and scoring for Submission #2. Never score 12.6B candidates or materialize hundreds of GB. Read `CONTINUE_HERE.md`, root `PROJECT_STATE.md`, `EXPERIMENT_LOG.md`, `TEAM_README.md`, and `TEAM_TASKS.md`.
+Next: review the combined candidate against the preserved .40 and .80 versions; if submitting, record its portal score. Preserve Submission #1, use only supplied data, and keep Stage 4 frozen.

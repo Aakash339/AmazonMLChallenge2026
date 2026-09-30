@@ -1,0 +1,28 @@
+{
+  "seed_split": 20261101,
+  "seed_sample": 20261102,
+  "bucket": "3",
+  "size": 500,
+  "spec": {
+    "size": 500,
+    "id_sha256": "2440175c2cf5ab269c874d5761f61ecc376256588018a06616d8612037aa67cb",
+    "true_links": 1695,
+    "stratum_counts": {
+      "India/multi": 151757,
+      "India/one": 9229,
+      "India/zero": 9490,
+      "US/multi": 227488,
+      "US/one": 13771,
+      "US/zero": 14341
+    },
+    "stratum_sample": {
+      "India/multi": 178,
+      "India/one": 11,
+      "India/zero": 11,
+      "US/multi": 267,
+      "US/one": 16,
+      "US/zero": 17
+    }
+  },
+  "previous_validation_ids_excluded": 73641
+}

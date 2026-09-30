@@ -1,0 +1,13 @@
+{
+  "date": "2026-09-27",
+  "required_training_inputs": ["student_resource/dataset/train/train_source1.tsv", "student_resource/dataset/train/train_source2.tsv", "student_resource/dataset/train/train_source3.tsv", "student_resource/dataset/train/train_ground_truth.tsv"],
+  "present_extracted": ["student_resource/dataset/train/train_source1.tsv", "student_resource/dataset/train/train_source3.tsv", "student_resource/dataset/train/train_ground_truth.tsv"],
+  "missing_extracted": ["student_resource/dataset/train/train_source2.tsv"],
+  "archive_checked": "student_resource/dataset-20260927T071941Z-1-001.zip",
+  "archive_entries": ["dataset/test/test_source1.tsv", "dataset/train/train_source1.tsv", "dataset/test/test_source3.tsv", "dataset/test/test_source2.tsv", "dataset/train/train_source3.tsv"],
+  "archive_contains_missing_input": false,
+  "local_search": "No train_source2.tsv found under C:\\Users\\USER.",
+  "held_out_metric": null,
+  "submission2_generated": false,
+  "reason": "Exact baseline searches both S2 and S3. Omitting training S2 changes match outputs and the unique-name fallback, so evaluation would not reproduce Submission #1."
+}

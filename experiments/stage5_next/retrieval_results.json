@@ -1,0 +1,203 @@
+{
+  "title": "Fuzzy-name plus partial-address retrieval experiment",
+  "split_seed": 20261030,
+  "sample_seed": 20261031,
+  "per_bucket": 750,
+  "excluded_prior_validation_ids": 72141,
+  "samples": {
+    "0": {
+      "size": 750,
+      "holdout_bucket": 0,
+      "stratum_population": {
+        "India/multi": 152393,
+        "India/one": 9258,
+        "India/zero": 9464,
+        "US/multi": 228167,
+        "US/one": 13760,
+        "US/zero": 14110
+      },
+      "stratum_sample": {
+        "India/multi": 267,
+        "India/one": 16,
+        "India/zero": 17,
+        "US/multi": 401,
+        "US/one": 24,
+        "US/zero": 25
+      },
+      "id_sha256": "bb6a8d4e5ecbb6b43418c15b2617f24fce060aba34778090f85b31d4053a796e",
+      "true_links": 2602
+    },
+    "1": {
+      "size": 750,
+      "holdout_bucket": 1,
+      "stratum_population": {
+        "India/multi": 152462,
+        "India/one": 9181,
+        "India/zero": 9535,
+        "US/multi": 227918,
+        "US/one": 13897,
+        "US/zero": 14289
+      },
+      "stratum_sample": {
+        "India/multi": 268,
+        "India/one": 16,
+        "India/zero": 17,
+        "US/multi": 400,
+        "US/one": 24,
+        "US/zero": 25
+      },
+      "id_sha256": "1de7a32d8ca8021b01980a2a82b0611a301d78aa76abcc5ca0e2950a11888416",
+      "true_links": 2523
+    }
+  },
+  "candidate_rule": "frozen Stage 4 A+HF address/name candidate set; rank/filter by fuzzy name similarity only after at least two shared normalized address tokens and address containment >=0.40",
+  "candidate_recall": {
+    "0": {
+      "candidates": 5496650,
+      "true_links_found": 2531,
+      "true_links": 2602,
+      "recall": 0.9727132974634897
+    },
+    "1": {
+      "candidates": 5217837,
+      "true_links_found": 2462,
+      "true_links": 2523,
+      "recall": 0.9758224336107808
+    }
+  },
+  "metrics": {
+    "current_combined": {
+      "0": {
+        "macro_f0_5": 0.4548383911301601,
+        "precision": 0.9354375896700143,
+        "recall": 0.25057647963105306,
+        "tp": 652,
+        "fp": 45,
+        "fn": 1950,
+        "zero_match_accuracy": 0.9523809523809523,
+        "predicted_ids": 697
+      },
+      "1": {
+        "macro_f0_5": 0.4775863411370972,
+        "precision": 0.9436619718309859,
+        "recall": 0.26555687673404677,
+        "tp": 670,
+        "fp": 40,
+        "fn": 1853,
+        "zero_match_accuracy": 0.8809523809523809,
+        "predicted_ids": 710
+      }
+    },
+    "fuzzy_addr_overlap_95": {
+      "0": {
+        "macro_f0_5": 0.5210969923124374,
+        "precision": 0.9263157894736842,
+        "recall": 0.30438124519600307,
+        "tp": 792,
+        "fp": 63,
+        "fn": 1810,
+        "zero_match_accuracy": 0.9523809523809523,
+        "predicted_ids": 855
+      },
+      "1": {
+        "macro_f0_5": 0.53701389863317,
+        "precision": 0.9371362048894063,
+        "recall": 0.31906460562822037,
+        "tp": 805,
+        "fp": 54,
+        "fn": 1718,
+        "zero_match_accuracy": 0.8809523809523809,
+        "predicted_ids": 859
+      }
+    },
+    "fuzzy_addr_overlap_90": {
+      "0": {
+        "macro_f0_5": 0.6210698971710288,
+        "precision": 0.865296803652968,
+        "recall": 0.4369715603382014,
+        "tp": 1137,
+        "fp": 177,
+        "fn": 1465,
+        "zero_match_accuracy": 0.8571428571428571,
+        "predicted_ids": 1314
+      },
+      "1": {
+        "macro_f0_5": 0.6435405906206954,
+        "precision": 0.8789514263685428,
+        "recall": 0.4518430439952438,
+        "tp": 1140,
+        "fp": 157,
+        "fn": 1383,
+        "zero_match_accuracy": 0.7142857142857143,
+        "predicted_ids": 1297
+      }
+    },
+    "fuzzy_addr_overlap_85": {
+      "0": {
+        "macro_f0_5": 0.6377479531458345,
+        "precision": 0.7395225464190981,
+        "recall": 0.5357417371252883,
+        "tp": 1394,
+        "fp": 491,
+        "fn": 1208,
+        "zero_match_accuracy": 0.5238095238095238,
+        "predicted_ids": 1885
+      },
+      "1": {
+        "macro_f0_5": 0.6575306947901347,
+        "precision": 0.7339692633810281,
+        "recall": 0.5489496630994848,
+        "tp": 1385,
+        "fp": 502,
+        "fn": 1138,
+        "zero_match_accuracy": 0.4523809523809524,
+        "predicted_ids": 1887
+      }
+    },
+    "fuzzy_addr_overlap_80": {
+      "0": {
+        "macro_f0_5": 0.6267478457893648,
+        "precision": 0.579408543263965,
+        "recall": 0.6099154496541123,
+        "tp": 1587,
+        "fp": 1152,
+        "fn": 1015,
+        "zero_match_accuracy": 0.38095238095238093,
+        "predicted_ids": 2739
+      },
+      "1": {
+        "macro_f0_5": 0.6362918370073306,
+        "precision": 0.5417661097852029,
+        "recall": 0.6298057867617916,
+        "tp": 1589,
+        "fp": 1344,
+        "fn": 934,
+        "zero_match_accuracy": 0.21428571428571427,
+        "predicted_ids": 2933
+      }
+    },
+    "fuzzy_addr_overlap_75": {
+      "0": {
+        "macro_f0_5": 0.5994678063923349,
+        "precision": 0.4423469387755102,
+        "recall": 0.6664104534973098,
+        "tp": 1734,
+        "fp": 2186,
+        "fn": 868,
+        "zero_match_accuracy": 0.23809523809523808,
+        "predicted_ids": 3920
+      },
+      "1": {
+        "macro_f0_5": 0.6017652737884486,
+        "precision": 0.3945701357466063,
+        "recall": 0.69124058660325,
+        "tp": 1744,
+        "fp": 2676,
+        "fn": 779,
+        "zero_match_accuracy": 0.09523809523809523,
+        "predicted_ids": 4420
+      }
+    }
+  },
+  "runtime_seconds": 1092.614
+}

@@ -1,0 +1,664 @@
+{
+  "title": "Submission #1 held-out reproduction and controlled rule experiments",
+  "sample": {
+    "split_seed": 20261020,
+    "sample_seed": 20261021,
+    "holdout_definition": "SHA256(split_seed + NUL + S1 ID) integer mod 5 == 0; remaining entities are development pool",
+    "sample_method": "population-proportional stratified bottom-k by match class x country within holdout pool",
+    "sample_size": 10000,
+    "holdout_population": 441861,
+    "stratum_population": {
+      "multi/India": 157025,
+      "multi/US": 236236,
+      "one/India": 9555,
+      "one/US": 14299,
+      "zero/India": 9855,
+      "zero/US": 14891
+    },
+    "stratum_sample": {
+      "multi/India": 3554,
+      "multi/US": 5346,
+      "one/India": 216,
+      "one/US": 324,
+      "zero/India": 223,
+      "zero/US": 337
+    },
+    "countries": [
+      "India",
+      "US"
+    ],
+    "ordered_ids_sha256": "6403a055de20edf85254c6ab64138c6bca20c6c5e8e2e1f292bc48e1f4a40601",
+    "true_links": 34776,
+    "sample_selection_storage": "SQLite temporary file; full ground truth and holdout pool are not retained in Python memory"
+  },
+  "submission1_rules": "same-country exact normalized name+address OR exact normalized name+approved abbreviation-address; only if neither produces a match, emit normalized-name posting iff unique across S2+S3",
+  "experiments": {
+    "baseline": {
+      "macro_f0_5": 0.2201991597046744,
+      "micro_precision": 0.8903688524590164,
+      "micro_recall": 0.07496549344375432,
+      "tp": 2607,
+      "fp": 321,
+      "fn": 32169,
+      "predicted_links": 2928,
+      "zero_match_entities": 560,
+      "zero_match_correct_empty": 518,
+      "zero_match_accuracy": 0.925,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8900,
+          "macro_f0_5": 0.17999905584794879,
+          "tp": 2525,
+          "fp": 248,
+          "fn": 31711
+        },
+        "one": {
+          "entities": 540,
+          "macro_f0_5": 0.15185185185185185,
+          "tp": 82,
+          "fp": 31,
+          "fn": 458
+        },
+        "zero": {
+          "entities": 560,
+          "macro_f0_5": 0.925,
+          "tp": 0,
+          "fp": 42,
+          "fn": 0
+        }
+      },
+      "candidate_or_prediction_ids": 2928,
+      "per_s1": {
+        "zero": 7145,
+        "one": 2788,
+        "multi": 67
+      }
+    },
+    "addr_exact_name_sim_095": {
+      "macro_f0_5": 0.22916464258780433,
+      "micro_precision": 0.8962203715566944,
+      "micro_recall": 0.08045778697952612,
+      "tp": 2798,
+      "fp": 324,
+      "fn": 31978,
+      "predicted_links": 3122,
+      "zero_match_entities": 560,
+      "zero_match_correct_empty": 518,
+      "zero_match_accuracy": 0.925,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8900,
+          "macro_f0_5": 0.1897355534694431,
+          "tp": 2713,
+          "fp": 251,
+          "fn": 31523
+        },
+        "one": {
+          "entities": 540,
+          "macro_f0_5": 0.1574074074074074,
+          "tp": 85,
+          "fp": 31,
+          "fn": 455
+        },
+        "zero": {
+          "entities": 560,
+          "macro_f0_5": 0.925,
+          "tp": 0,
+          "fp": 42,
+          "fn": 0
+        }
+      },
+      "candidate_or_prediction_ids": 3122,
+      "per_s1": {
+        "zero": 7031,
+        "one": 2831,
+        "multi": 138
+      }
+    },
+    "name_exact_addr_overlap_080": {
+      "macro_f0_5": 0.34272350795436535,
+      "micro_precision": 0.9408875954892688,
+      "micro_recall": 0.14875201288244766,
+      "tp": 5173,
+      "fp": 325,
+      "fn": 29603,
+      "predicted_links": 5498,
+      "zero_match_entities": 560,
+      "zero_match_correct_empty": 518,
+      "zero_match_accuracy": 0.925,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8900,
+          "macro_f0_5": 0.31541967185883746,
+          "tp": 5071,
+          "fp": 250,
+          "fn": 29165
+        },
+        "one": {
+          "entities": 540,
+          "macro_f0_5": 0.18888888888888888,
+          "tp": 102,
+          "fp": 33,
+          "fn": 438
+        },
+        "zero": {
+          "entities": 560,
+          "macro_f0_5": 0.925,
+          "tp": 0,
+          "fp": 42,
+          "fn": 0
+        }
+      },
+      "candidate_or_prediction_ids": 5498,
+      "per_s1": {
+        "zero": 5427,
+        "one": 3802,
+        "multi": 771
+      }
+    }
+  },
+  "marginal_vs_baseline": {
+    "addr_exact_name_sim_095": {
+      "added_true_links": 191,
+      "added_false_links": 3,
+      "added_links": 194
+    },
+    "name_exact_addr_overlap_080": {
+      "added_true_links": 2566,
+      "added_false_links": 4,
+      "added_links": 2570
+    }
+  },
+  "baseline_error_groups": {
+    "false_positive_links": {
+      "other": 321
+    },
+    "false_negative_links": {
+      "typo_like_name": 13932,
+      "missing_target_address": 1436,
+      "other_or_candidate_miss": 7358,
+      "name_order_or_punctuation": 1776,
+      "name_variation_same_address": 2996,
+      "address_variation_same_name": 4671
+    },
+    "examples": {
+      "typo_like_name": [
+        {
+          "s1": "S1-100863147",
+          "target": "S2-562221440",
+          "s1_name": "Kolkata Education Private Limited",
+          "target_name": "Kolkata Enducnn Private  Limited",
+          "s1_address": "24 Park Street Park Center, Shop No-27, Kolkata, Kolkata, Kolkata, Howrah, West Bengal",
+          "target_address": "H.NO D/24 PARK STREET PARK CENTER, SHOP NO-27, KOLKATA, KOLKATA, KOLKATA, West Bengal"
+        },
+        {
+          "s1": "S1-100863147",
+          "target": "S3-361287279",
+          "s1_name": "Kolkata Education Private Limited",
+          "target_name": "Kolkata Education Praite Limited",
+          "s1_address": "24 Park Street Park Center, Shop No-27, Kolkata, Kolkata, Kolkata, Howrah, West Bengal",
+          "target_address": "Howrah, H.no 24 Park Street Park Center, Kolkata, WB"
+        },
+        {
+          "s1": "S1-100900903",
+          "target": "S3-591738181",
+          "s1_name": "Hyderabad (India) Solutions Ahmedabad Pvt Ltd",
+          "target_name": "Shri Hyderabad Hyderabad (India) Solutions Ahmedabad PVT LTD",
+          "s1_address": "A-1203. Parshwa Luxuria, Off Bopal Ambli Road Brts, Nr. Ashok Vatika, Ahmedabad, Ahmedabad, Gujarat",
+          "target_address": "A-203. Parshwa Luxuria, Off Bopal Ambli Road Brts, Nr. Ashok Vatika, Ahmedabad, Ahmedabad, ગુજરાત"
+        },
+        {
+          "s1": "S1-100900903",
+          "target": "S2-368467724",
+          "s1_name": "Hyderabad (India) Solutions Ahmedabad Pvt Ltd",
+          "target_name": "Hyderabad (India) Solutions Pvt Ltd Center",
+          "s1_address": "A-1203. Parshwa Luxuria, Off Bopal Ambli Road Brts, Nr. Ashok Vatika, Ahmedabad, Ahmedabad, Gujarat",
+          "target_address": "A-1203. PARSHWA LUXURIA, OFF BOPAL AMBLI ROAD BRTS, NR. ASHOK VATIKA, AHMEDABAD, AHMEDABAD, NULL, Gujarat"
+        },
+        {
+          "s1": "S1-101310773",
+          "target": "S3-577477178",
+          "s1_name": "India Suprabha Life Private Limited",
+          "target_name": "India Suprabha Life Private",
+          "s1_address": "No 1 Adikesavan Street Chindatripet, Chennai, Tamil Nadu",
+          "target_address": "Door No 1 Adikesavan Street Chindatripet, TN, Chennai"
+        },
+        {
+          "s1": "S1-10135782",
+          "target": "S3-303958267",
+          "s1_name": "BH Tubes Pvt Ltd",
+          "target_name": "BH Tubes Pvt Limited",
+          "s1_address": "1357, Maharashtra, Thane, Plot No 17 & 18, Platinum Technopark",
+          "target_address": "1357, Thane, MH"
+        },
+        {
+          "s1": "S1-10135782",
+          "target": "S2-424985097",
+          "s1_name": "BH Tubes Pvt Ltd",
+          "target_name": "BH TUBES PVT",
+          "s1_address": "1357, Maharashtra, Thane, Plot No 17 & 18, Platinum Technopark",
+          "target_address": "HN 39 1357, PLOT NO 17 & 18, PLATINUM TECHNOPARK, THANE, Maharashtra"
+        },
+        {
+          "s1": "S1-101952008",
+          "target": "S2-243687047",
+          "s1_name": "Ankuram Cat Private Limited",
+          "target_name": "Ankuram Cat Private Ltd",
+          "s1_address": "C/O Bimla Devi H No 66, Baspadamka, Pataudi, Gurgaon, Haryana",
+          "target_address": "C/O BIMLA DEVI H NO 66, BASPADAMKA, PATAUDI, Haryana"
+        }
+      ],
+      "missing_target_address": [
+        {
+          "s1": "S1-100900903",
+          "target": "S3-794208292",
+          "s1_name": "Hyderabad (India) Solutions Ahmedabad Pvt Ltd",
+          "target_name": "Hyderabad (India) Ahmedabad Pvt Ltd (Services)",
+          "s1_address": "A-1203. Parshwa Luxuria, Off Bopal Ambli Road Brts, Nr. Ashok Vatika, Ahmedabad, Ahmedabad, Gujarat",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-101952008",
+          "target": "S3-140561202",
+          "s1_name": "Ankuram Cat Private Limited",
+          "target_name": "Ankuram Cat",
+          "s1_address": "C/O Bimla Devi H No 66, Baspadamka, Pataudi, Gurgaon, Haryana",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-102641094",
+          "target": "S3-286616310",
+          "s1_name": "Pcl Medical Centre",
+          "target_name": "Shri Pcl Centre Partners",
+          "s1_address": "205, Mahalalaxmi Market, Behind Market Yard, Pune, Maharashtra",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-102757432",
+          "target": "S3-88561478",
+          "s1_name": "Perfect Infrastructure Private Limited",
+          "target_name": "Perfect Infrrsatrutcure  Private Limited",
+          "s1_address": "No. 83, 5Th Main, 2Nd Cross, Mathikere Extension, Bangalore, Karnataka",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-102782539",
+          "target": "S3-148618820",
+          "s1_name": "Auto Realtech (India) Private Limited",
+          "target_name": "Auto (India) Private Limited Center",
+          "s1_address": "Vill. - Mallikpur Bus Stand P.O. P.S. - Lalgola, Lalgola, Murshidabad, West Bengal",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-103160745",
+          "target": "S3-336742995",
+          "s1_name": "Competition Agro",
+          "target_name": "M/s Competition (Afimg)",
+          "s1_address": "363, 19Th Main Road, 1St Block, Rajajinagar, Bangalore, Bangalore North, Karnataka, India, Bangalore North, Bangalore, Karnataka",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-10551653",
+          "target": "S3-390712434",
+          "s1_name": "Norton Spinning Private Limited",
+          "target_name": "Norton Spinning Private",
+          "s1_address": "Kd Iv/918, 924 Trivandrum Road, Pulamon P.O, Kottarakkara, Kollam, Kerala",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-106402505",
+          "target": "S3-269251361",
+          "s1_name": "ZT Funds Private Limited",
+          "target_name": "ZT  Funds",
+          "s1_address": "Amravati, Maharashtra, Amravati, Rathi Nagar Wno 2, House No. 578",
+          "target_address": ""
+        }
+      ],
+      "other_or_candidate_miss": [
+        {
+          "s1": "S1-100900903",
+          "target": "S3-9880271",
+          "s1_name": "Hyderabad (India) Solutions Ahmedabad Pvt Ltd",
+          "target_name": "Smt hyderabadindiasolutions.com",
+          "s1_address": "A-1203. Parshwa Luxuria, Off Bopal Ambli Road Brts, Nr. Ashok Vatika, Ahmedabad, Ahmedabad, Gujarat",
+          "target_address": "A-203. Parshwa Luxuria, Off Bopal Ambli Road Brts, Nr. Ashok Vatika, Ahmedabad, Ahmedabad, ગુજરાત"
+        },
+        {
+          "s1": "S1-10135782",
+          "target": "S2-954158025",
+          "s1_name": "BH Tubes Pvt Ltd",
+          "target_name": "BHTUBES.COM",
+          "s1_address": "1357, Maharashtra, Thane, Plot No 17 & 18, Platinum Technopark",
+          "target_address": "HN 39 1357, PLOT NO 17 & 18, PLATINUM TECHNOPARK, THANE, Maharashtra"
+        },
+        {
+          "s1": "S1-101952008",
+          "target": "S2-9599574",
+          "s1_name": "Ankuram Cat Private Limited",
+          "target_name": "ANKURAMCATCOM",
+          "s1_address": "C/O Bimla Devi H No 66, Baspadamka, Pataudi, Gurgaon, Haryana",
+          "target_address": "C/O BIMLA DEVI H NO 66, BASPADAMKA, PATAUDI, Haryana"
+        },
+        {
+          "s1": "S1-101952008",
+          "target": "S2-498122585",
+          "s1_name": "Ankuram Cat Private Limited",
+          "target_name": "Ankuram Cat Limited Center",
+          "s1_address": "C/O Bimla Devi H No 66, Baspadamka, Pataudi, Gurgaon, Haryana",
+          "target_address": "C/O BIMLA DEVI H NO 66, BASPADAMKA, PATAUDI, Haryana"
+        },
+        {
+          "s1": "S1-102208745",
+          "target": "S3-7328518",
+          "s1_name": "Indo Infra",
+          "target_name": "इंडो इंफ्रा",
+          "s1_address": "Orchard Palace, Ground Floor, Dr. Peter Dias Road, Bandra West, Maharashtra",
+          "target_address": "Orchard Palace, Ground Floor, Dr. Peter Dias Road, Bandra West, MH"
+        },
+        {
+          "s1": "S1-102208745",
+          "target": "S2-469608304",
+          "s1_name": "Indo Infra",
+          "target_name": "इंडो इंफ्रा",
+          "s1_address": "Orchard Palace, Ground Floor, Dr. Peter Dias Road, Bandra West, Maharashtra",
+          "target_address": "HN 836. ORCHARD PALACE, GROUND FLOOR, BANDRA WEST, Maharashtra"
+        },
+        {
+          "s1": "S1-102607098",
+          "target": "S3-53753825",
+          "s1_name": "Study (India) Trade Pvt Ltd",
+          "target_name": "Dr Study Trade Pvt Ltd Services",
+          "s1_address": "Delhi, West Delhi, Delhi, J-34, Mohan Garden, Uttam Nagar",
+          "target_address": "J-34, Mohan Garden, Uttam Nagar, West Delhi, दिल्ली"
+        },
+        {
+          "s1": "S1-102757432",
+          "target": "S2-746487438",
+          "s1_name": "Perfect Infrastructure Private Limited",
+          "target_name": "ಪರ್ಫೆಕ್ಟ್ ಇನ್‌ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಪ್ರೈವೇಟ್ ಲಿಮಿಟೆಡ್",
+          "s1_address": "No. 83, 5Th Main, 2Nd Cross, Mathikere Extension, Bangalore, Karnataka",
+          "target_address": "NO. A-83, 5TH MAIN, 2ND CROSS, MATHIKERE EXTENSION, BANGALORE URBAN, BANGALORE, Karnataka"
+        }
+      ],
+      "name_order_or_punctuation": [
+        {
+          "s1": "S1-10135782",
+          "target": "S2-634891757",
+          "s1_name": "BH Tubes Pvt Ltd",
+          "target_name": "BH Tubes  Ltd Pvt",
+          "s1_address": "1357, Maharashtra, Thane, Plot No 17 & 18, Platinum Technopark",
+          "target_address": "HN 39 1357, PLOT NO 17 & 18, PLATINUM TECHNOPARK, THANE, Maharashtra"
+        },
+        {
+          "s1": "S1-102607098",
+          "target": "S2-291227368",
+          "s1_name": "Study (India) Trade Pvt Ltd",
+          "target_name": "Pvt Study (India) Trade Ltd.",
+          "s1_address": "Delhi, West Delhi, Delhi, J-34, Mohan Garden, Uttam Nagar",
+          "target_address": "J-34, MOHAN GARDEN, UTTAM NAGAR, SOUTH EAST DELHI, WEST DELHI, दिल्ली"
+        },
+        {
+          "s1": "S1-102782539",
+          "target": "S3-657909299",
+          "s1_name": "Auto Realtech (India) Private Limited",
+          "target_name": "Private Auto Realtech (India) Limited",
+          "s1_address": "Vill. - Mallikpur Bus Stand P.O. P.S. - Lalgola, Lalgola, Murshidabad, West Bengal",
+          "target_address": "Vill. - Mallikpur Bus Stand P.o. P.s. - Lalgola, Lalgola, Murshidabad, পশ্চিমবঙ্গ"
+        },
+        {
+          "s1": "S1-102782539",
+          "target": "S3-194168920",
+          "s1_name": "Auto Realtech (India) Private Limited",
+          "target_name": "Private Auto Realtech (India) Limited",
+          "s1_address": "Vill. - Mallikpur Bus Stand P.O. P.S. - Lalgola, Lalgola, Murshidabad, West Bengal",
+          "target_address": "Vill. - Mallikpur Bus Stand P.o. P.s. - Lalgola, Lalgola, Murshidabad, WB"
+        },
+        {
+          "s1": "S1-105225341",
+          "target": "S3-301446439",
+          "s1_name": "Bangar Industries Group",
+          "target_name": "Bangar Group Industries",
+          "s1_address": "Plot No 33 R S Banarasi Dass Estate, Civil Lines, New Delhi, Central Delhi, Delhi",
+          "target_address": "Plot No 33 R S Banarasi Dass Estate, Civil Lines, New Delhi, Central Delhi, DL"
+        },
+        {
+          "s1": "S1-10738089",
+          "target": "S3-271713522",
+          "s1_name": "Future Technology Pvt Ltd",
+          "target_name": "Future Pvt Technology Ltd",
+          "s1_address": "Delhi, New Kondli Mayur Vihar Phase-Iii, Delhi, C-5/85, Near Petrol Pump",
+          "target_address": "DL, Near Petrol Pump, Delhi, C-5/85"
+        },
+        {
+          "s1": "S1-10738089",
+          "target": "S3-393043170",
+          "s1_name": "Future Technology Pvt Ltd",
+          "target_name": "Pvt Future Technology Ltd",
+          "s1_address": "Delhi, New Kondli Mayur Vihar Phase-Iii, Delhi, C-5/85, Near Petrol Pump",
+          "target_address": "C-5/85, Near Petrol Pump, Delhi, DL"
+        },
+        {
+          "s1": "S1-108640275",
+          "target": "S3-373924229",
+          "s1_name": "Modern Industries Private Limited",
+          "target_name": "Modern Industries Limited  Private",
+          "s1_address": "14-239, Madanapalle, Andhra Pradesh, Chittoor, Current Colony",
+          "target_address": "4-239, Current Colony, Madanapalle, Chittoor, AP"
+        }
+      ],
+      "name_variation_same_address": [
+        {
+          "s1": "S1-101952008",
+          "target": "S3-670112173",
+          "s1_name": "Ankuram Cat Private Limited",
+          "target_name": "Ankuram",
+          "s1_address": "C/O Bimla Devi H No 66, Baspadamka, Pataudi, Gurgaon, Haryana",
+          "target_address": "C/O Bimla Devi H No 66, Baspadamka, Pataudi, Gurgaon, Haryana"
+        },
+        {
+          "s1": "S1-102782539",
+          "target": "S3-875050682",
+          "s1_name": "Auto Realtech (India) Private Limited",
+          "target_name": "Ectoveoriza formerly: Auto Realtech (India) Private Limited",
+          "s1_address": "Vill. - Mallikpur Bus Stand P.O. P.S. - Lalgola, Lalgola, Murshidabad, West Bengal",
+          "target_address": "Vill. - Mallikpur Bus Stand P.O. P.S. - Lalgola, Lalgola, Murshidabad, West Bengal"
+        },
+        {
+          "s1": "S1-103258528",
+          "target": "S2-520783269",
+          "s1_name": "Apco Infra Limited",
+          "target_name": "Apco Infra",
+          "s1_address": "28, Suvas Bunglows, Nr. Sona Cross Road, New C. G. Road, Chandkheda, Ahmedabad, Gujarat",
+          "target_address": "28, SUVAS BUNGLOWS, NR. SONA CROSS ROAD, NEW C. G. ROAD, CHANDKHEDA, AHMEDABAD, Gujarat"
+        },
+        {
+          "s1": "S1-104069409",
+          "target": "S3-72976116",
+          "s1_name": "Avon Modular Private Limited",
+          "target_name": "Zetaumbrafaye",
+          "s1_address": "D No. 5-2-35/1, Post Office Basthi, Bellampalli, Adilabad, Telangana",
+          "target_address": "D No. 5-2-35/1, Post Office Basthi, Bellampalli, Adilabad, Telangana"
+        },
+        {
+          "s1": "S1-106567391",
+          "target": "S3-911335590",
+          "s1_name": "Surya Industries Pvt Ltd",
+          "target_name": "Surya Industries",
+          "s1_address": "Plot No. B135, Opp. Garware Wall Ropes Ltd. Wai Midc, Taluka Wai, Dist Satara, Wai, Satara, Maharashtra",
+          "target_address": "Plot No. B135, Opp. Garware Wall Ropes Ltd. Wai Midc, Taluka Wai, Dist Satara, Wai, Satara, Maharashtra"
+        },
+        {
+          "s1": "S1-107110662",
+          "target": "S2-398350274",
+          "s1_name": "Axiom Management Private Limited",
+          "target_name": "Private Axiom Management Limited",
+          "s1_address": "12/1 Nellie Sengupta Sarani Flat No.D Ground Floor, Kolkata, Howrah, West Bengal",
+          "target_address": "12/1 NELLIE SENGUPTA SARANI FLAT NO.D GROUND FLOOR, KOLKATA, HOWRAH, West Bengal"
+        },
+        {
+          "s1": "S1-108375172",
+          "target": "S2-891629575",
+          "s1_name": "Safe International School",
+          "target_name": "Safe International School Company",
+          "s1_address": "No.921, Poonamallee High Road Lane, 1St Floor, Chennai, Tamil Nadu",
+          "target_address": "NO.#921 , POONAMALLEE HIGH ROAD LANE, 1ST FLOOR, CHENNAI, Tamil Nadu"
+        },
+        {
+          "s1": "S1-109380334",
+          "target": "S2-56586815",
+          "s1_name": "Aditri Nidhi Co",
+          "target_name": "ADITRI [NIDHI]",
+          "s1_address": "B-34, Yash Appartments Sector-C Aliganj, Lucknow, Uttar Pradesh",
+          "target_address": "B-34, YASH APPARTMENTS SECTOR-C ALIGANJ, LUCKNOW, Uttar Pradesh"
+        }
+      ],
+      "address_variation_same_name": [
+        {
+          "s1": "S1-102208745",
+          "target": "S3-933884859",
+          "s1_name": "Indo Infra",
+          "target_name": "INDO Infra",
+          "s1_address": "Orchard Palace, Ground Floor, Dr. Peter Dias Road, Bandra West, Maharashtra",
+          "target_address": "Orchard Palace, Dr. Peter Dias Road, Bandra West, MH"
+        },
+        {
+          "s1": "S1-102607098",
+          "target": "S3-87141647",
+          "s1_name": "Study (India) Trade Pvt Ltd",
+          "target_name": "Study (India) Trade Pvt Ltd.",
+          "s1_address": "Delhi, West Delhi, Delhi, J-34, Mohan Garden, Uttam Nagar",
+          "target_address": "J-34, Delhi, West Delhi, दिल्ली"
+        },
+        {
+          "s1": "S1-102607098",
+          "target": "S2-859424894",
+          "s1_name": "Study (India) Trade Pvt Ltd",
+          "target_name": "STUDY (INDIA) TRADE PVT LTD",
+          "s1_address": "Delhi, West Delhi, Delhi, J-34, Mohan Garden, Uttam Nagar",
+          "target_address": "J-34, MOHAN GARDEN, UTTAM NAGAR, DELHI, Delhi"
+        },
+        {
+          "s1": "S1-102782539",
+          "target": "S2-682259541",
+          "s1_name": "Auto Realtech (India) Private Limited",
+          "target_name": "Auto Realtech-(India) Private Limited",
+          "s1_address": "Vill. - Mallikpur Bus Stand P.O. P.S. - Lalgola, Lalgola, Murshidabad, West Bengal",
+          "target_address": "VILL. - MALLIKPUR BUS STAND P.O. P.S. - LALGOLA, LALGOLA, West Bengal"
+        },
+        {
+          "s1": "S1-103468752",
+          "target": "S2-606924955",
+          "s1_name": "Jay Enterprises Private Limited",
+          "target_name": "JAY ENTERPRISES PRIVATE-LIMITED",
+          "s1_address": "Hooghly, Dankuni, West Bengal, 1St Floor, T.N. Mukherjee Road, Monoharpur(East), Anati Mansion",
+          "target_address": "H.NO 170- ANATI MANSION, 1ST FLOOR, T.N. MUKHERJEE ROAD, MONOHARPUR(EAST), DANKUNI, West Bengal"
+        },
+        {
+          "s1": "S1-103902086",
+          "target": "S3-151944446",
+          "s1_name": "Future Trading Private Limited",
+          "target_name": "future trading private limited",
+          "s1_address": "Off. No. 701, 7Th Floor, Atlanta Centre, Sonawala X Road, Goregaon (East), Mumbai, Maharashtra",
+          "target_address": "Off. No. 701, 7Th Floor, Atlanta Centre, Sonawala X Road, Mumbai Suburban, Goregaon (East), MH"
+        },
+        {
+          "s1": "S1-106567391",
+          "target": "S2-32375471",
+          "s1_name": "Surya Industries Pvt Ltd",
+          "target_name": "Surya-Industries Pvt Ltd",
+          "s1_address": "Plot No. B135, Opp. Garware Wall Ropes Ltd. Wai Midc, Taluka Wai, Dist Satara, Wai, Satara, Maharashtra",
+          "target_address": "PLOT NO. B##135, OPP. GARWARE WALL ROPES LTD. WAI MIDC, TALUKA WAI, DIST SATARA, WAI, महाराष्ट्र"
+        },
+        {
+          "s1": "S1-106567391",
+          "target": "S3-132361948",
+          "s1_name": "Surya Industries Pvt Ltd",
+          "target_name": "Surya  Industries Pvt Ltd",
+          "s1_address": "Plot No. B135, Opp. Garware Wall Ropes Ltd. Wai Midc, Taluka Wai, Dist Satara, Wai, Satara, Maharashtra",
+          "target_address": "Plot No. B135, Opp. Garware Wall Ropes Ltd. Wai Midc, Taluka Wai, Dist Satara, Wai, Satara, MH"
+        }
+      ],
+      "FP_other": [
+        {
+          "s1": "S1-105225341",
+          "target": "S2-929883177",
+          "s1_name": "Bangar Industries Group",
+          "target_name": "Bangar Industries Group",
+          "s1_address": "Plot No 33 R S Banarasi Dass Estate, Civil Lines, New Delhi, Central Delhi, Delhi",
+          "target_address": "PLOT NO B3/42 R S BANARASI DASS ESTATE, CIVIL LINES, NEW DELHI, Delhi"
+        },
+        {
+          "s1": "S1-120063199",
+          "target": "S3-443396355",
+          "s1_name": "Royal Products Limited",
+          "target_name": "Royal Products Limited",
+          "s1_address": "58 1St Floor Orbit Mall A B Road Indore, Indore, Madhya Pradesh",
+          "target_address": "Seri Lingampally, TG, 9Th Flo, Sy 144, Kapil, Kavuri Hub, Nanakramguda, #65/7 Altf, K.v.rangareddy"
+        },
+        {
+          "s1": "S1-120213647",
+          "target": "S3-867766771",
+          "s1_name": "Delhi Events",
+          "target_name": "Delhi-Events",
+          "s1_address": "110 Bhagirathi Appartment, Sector-9 Rohini, Delhi, North West Delhi, Delhi",
+          "target_address": "B-1186, G/f, Shop No. 2, Gd Colony Mayur Vihar Ph-iii, Delhi, East Delhi, DL"
+        },
+        {
+          "s1": "S1-126425992",
+          "target": "S3-185395089",
+          "s1_name": "Dynamic Services Pvt Ltd",
+          "target_name": "Dynamic Services Pvt Ltd",
+          "s1_address": "Ew4/547, Udayagiriearndrkecollege, Hassan, Karnataka",
+          "target_address": "दिल्ली, New Delhi, #21, West Delhi"
+        },
+        {
+          "s1": "S1-141449662",
+          "target": "S3-720559256",
+          "s1_name": "Kolkata Tradelink Private Limited",
+          "target_name": "Kolkata Tradelink  Private Limited",
+          "s1_address": "193/N Kasthadanga Road, Sarsuna, Kolkata, Kolkata, Howrah, West Bengal",
+          "target_address": "WB, #33/6, Greater Bombay, N. S Road, 5Th Floor Room No. 522 Kolkata, Kolkata, Howrah"
+        },
+        {
+          "s1": "S1-14236116",
+          "target": "S2-186313482",
+          "s1_name": "Ss Hospitality Limited",
+          "target_name": "SS HOSPITALITY  LIMITED",
+          "s1_address": "18, Charishma Centre, 19Th Road, Mumbai, Chembur, Maharashtra",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-145232562",
+          "target": "S3-984697277",
+          "s1_name": "Gold Media LLP",
+          "target_name": "Gold Media LLP",
+          "s1_address": "Huda Complextanaka Hyderabad, D-3, Telangana, A.P.",
+          "target_address": "#107 D-33, Road No. 16, Film Nagar, Shaikpet, Hyderabad, Andhra Pradesh"
+        },
+        {
+          "s1": "S1-14592670",
+          "target": "S3-580325405",
+          "s1_name": "Life Properties Limited",
+          "target_name": "Life Properties Limited",
+          "s1_address": "501, Floor - 5Th, Plot-13/1517, Sea Pearl Khira Bhavan, 535 Sardar Vallabhbhai Patel Road, Opera House, Opposite Sukh Sagar, Chowpatty, Mumbai, Mumbai, Maharashtra",
+          "target_address": "No.0023a, Malleswaram, Bangalore, KA"
+        }
+      ]
+    }
+  },
+  "runtime": {
+    "total_seconds": 202.129,
+    "target_scan_seconds": 171.836,
+    "target_rows_streamed": 10320219,
+    "peak_candidate_ids_by_mode": {
+      "baseline": 2928,
+      "addr_exact_name_sim_095": 3122,
+      "name_exact_addr_overlap_080": 5498
+    }
+  },
+  "limitations": [
+    "Single deterministic holdout sample; rule thresholds were prespecified, but sampling uncertainty remains.",
+    "Training labels can contain noise; string-based categories are diagnostic proxies, not adjudication.",
+    "Country validation covers only countries present in supplied training data."
+  ]
+}

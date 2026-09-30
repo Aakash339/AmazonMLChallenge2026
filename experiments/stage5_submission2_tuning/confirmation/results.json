@@ -1,0 +1,805 @@
+{
+  "title": "Submission #1 held-out reproduction and controlled rule experiments",
+  "sample": {
+    "split_seed": 20261020,
+    "sample_seed": 20261024,
+    "holdout_definition": "SHA256(split_seed + NUL + S1 ID) integer mod 5 == 3; this bucket is disjoint from other hash buckets",
+    "sample_method": "population-proportional stratified bottom-k by match class x country within holdout pool",
+    "sample_size": 10000,
+    "holdout_population": 439910,
+    "stratum_population": {
+      "multi/India": 156863,
+      "multi/US": 234666,
+      "one/India": 9666,
+      "one/US": 14216,
+      "zero/India": 9951,
+      "zero/US": 14548
+    },
+    "stratum_sample": {
+      "multi/India": 3566,
+      "multi/US": 5334,
+      "one/India": 220,
+      "one/US": 323,
+      "zero/India": 226,
+      "zero/US": 331
+    },
+    "countries": [
+      "India",
+      "US"
+    ],
+    "ordered_ids_sha256": "972d33675fbb90dab3bec7963c51902b10b0cd11aa3c3b9765d4a7121ba7fa50",
+    "true_links": 34965,
+    "sample_selection_storage": "SQLite temporary file; full ground truth and holdout pool are not retained in Python memory"
+  },
+  "submission1_rules": "same-country exact normalized name+address OR exact normalized name+approved abbreviation-address; only if neither produces a match, emit normalized-name posting iff unique across S2+S3",
+  "experiments": {
+    "baseline": {
+      "macro_f0_5": 0.2216534441049147,
+      "micro_precision": 0.8900169204737732,
+      "micro_recall": 0.07521807521807522,
+      "tp": 2630,
+      "fp": 325,
+      "fn": 32335,
+      "predicted_links": 2955,
+      "zero_match_entities": 557,
+      "zero_match_correct_empty": 526,
+      "zero_match_accuracy": 0.9443447037701975,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8900,
+          "macro_f0_5": 0.18118364506170193,
+          "tp": 2552,
+          "fp": 264,
+          "fn": 31870
+        },
+        "zero": {
+          "entities": 557,
+          "macro_f0_5": 0.9443447037701975,
+          "tp": 0,
+          "fp": 31,
+          "fn": 0
+        },
+        "one": {
+          "entities": 543,
+          "macro_f0_5": 0.143646408839779,
+          "tp": 78,
+          "fp": 30,
+          "fn": 465
+        }
+      },
+      "final_prediction_ids": 2955,
+      "per_s1": {
+        "zero": 7110,
+        "one": 2827,
+        "multi": 63
+      }
+    },
+    "addr_exact_name_sim_095": {
+      "macro_f0_5": 0.23231234232313955,
+      "micro_precision": 0.8979591836734694,
+      "micro_recall": 0.08179608179608179,
+      "tp": 2860,
+      "fp": 325,
+      "fn": 32105,
+      "predicted_links": 3185,
+      "zero_match_entities": 557,
+      "zero_match_correct_empty": 526,
+      "zero_match_accuracy": 0.9443447037701975,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8900,
+          "macro_f0_5": 0.19282285654285342,
+          "tp": 2779,
+          "fp": 264,
+          "fn": 31643
+        },
+        "zero": {
+          "entities": 557,
+          "macro_f0_5": 0.9443447037701975,
+          "tp": 0,
+          "fp": 31,
+          "fn": 0
+        },
+        "one": {
+          "entities": 543,
+          "macro_f0_5": 0.14917127071823205,
+          "tp": 81,
+          "fp": 30,
+          "fn": 462
+        }
+      },
+      "final_prediction_ids": 3185,
+      "per_s1": {
+        "zero": 6980,
+        "one": 2865,
+        "multi": 155
+      }
+    },
+    "addr_exact_name_sim_090": {
+      "macro_f0_5": 0.25407216159786206,
+      "micro_precision": 0.9107675617032818,
+      "micro_recall": 0.09603889603889604,
+      "tp": 3358,
+      "fp": 329,
+      "fn": 31607,
+      "predicted_links": 3687,
+      "zero_match_entities": 557,
+      "zero_match_correct_empty": 526,
+      "zero_match_accuracy": 0.9443447037701975,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8900,
+          "macro_f0_5": 0.21574899555315338,
+          "tp": 3263,
+          "fp": 267,
+          "fn": 31159
+        },
+        "zero": {
+          "entities": 557,
+          "macro_f0_5": 0.9443447037701975,
+          "tp": 0,
+          "fp": 31,
+          "fn": 0
+        },
+        "one": {
+          "entities": 543,
+          "macro_f0_5": 0.1741354614282791,
+          "tp": 95,
+          "fp": 31,
+          "fn": 448
+        }
+      },
+      "final_prediction_ids": 3687,
+      "per_s1": {
+        "zero": 6720,
+        "one": 2922,
+        "multi": 358
+      }
+    },
+    "name_exact_addr_overlap_080": {
+      "macro_f0_5": 0.34010156659393687,
+      "micro_precision": 0.94,
+      "micro_recall": 0.14651794651794653,
+      "tp": 5123,
+      "fp": 327,
+      "fn": 29842,
+      "predicted_links": 5450,
+      "zero_match_entities": 557,
+      "zero_match_correct_empty": 526,
+      "zero_match_accuracy": 0.9443447037701975,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8900,
+          "macro_f0_5": 0.3126983894313897,
+          "tp": 5031,
+          "fp": 265,
+          "fn": 29391
+        },
+        "zero": {
+          "entities": 557,
+          "macro_f0_5": 0.9443447037701975,
+          "tp": 0,
+          "fp": 31,
+          "fn": 0
+        },
+        "one": {
+          "entities": 543,
+          "macro_f0_5": 0.1694290976058932,
+          "tp": 92,
+          "fp": 31,
+          "fn": 451
+        }
+      },
+      "final_prediction_ids": 5450,
+      "per_s1": {
+        "zero": 5431,
+        "one": 3817,
+        "multi": 752
+      }
+    },
+    "name_exact_addr_overlap_060": {
+      "macro_f0_5": 0.3965269121831795,
+      "micro_precision": 0.9509929989998571,
+      "micro_recall": 0.19036179036179035,
+      "tp": 6656,
+      "fp": 343,
+      "fn": 28309,
+      "predicted_links": 6999,
+      "zero_match_entities": 557,
+      "zero_match_correct_empty": 524,
+      "zero_match_accuracy": 0.940754039497307,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8900,
+          "macro_f0_5": 0.37497405863278593,
+          "tp": 6552,
+          "fp": 279,
+          "fn": 27870
+        },
+        "zero": {
+          "entities": 557,
+          "macro_f0_5": 0.940754039497307,
+          "tp": 0,
+          "fp": 33,
+          "fn": 0
+        },
+        "one": {
+          "entities": 543,
+          "macro_f0_5": 0.19152854511970535,
+          "tp": 104,
+          "fp": 31,
+          "fn": 439
+        }
+      },
+      "final_prediction_ids": 6999,
+      "per_s1": {
+        "zero": 4773,
+        "one": 3823,
+        "multi": 1404
+      }
+    },
+    "name_exact_addr_overlap_040": {
+      "macro_f0_5": 0.40995097026152,
+      "micro_precision": 0.9207450224791265,
+      "micro_recall": 0.20500500500500501,
+      "tp": 7168,
+      "fp": 617,
+      "fn": 27797,
+      "predicted_links": 7785,
+      "zero_match_entities": 557,
+      "zero_match_correct_empty": 512,
+      "zero_match_accuracy": 0.9192100538599641,
+      "per_truth_class": {
+        "multi": {
+          "entities": 8900,
+          "macro_f0_5": 0.39099359954477897,
+          "tp": 7059,
+          "fp": 523,
+          "fn": 27363
+        },
+        "zero": {
+          "entities": 557,
+          "macro_f0_5": 0.9192100538599641,
+          "tp": 0,
+          "fp": 49,
+          "fn": 0
+        },
+        "one": {
+          "entities": 543,
+          "macro_f0_5": 0.19828115408225908,
+          "tp": 109,
+          "fp": 45,
+          "fn": 434
+        }
+      },
+      "final_prediction_ids": 7785,
+      "per_s1": {
+        "zero": 4523,
+        "one": 3772,
+        "multi": 1705
+      }
+    }
+  },
+  "marginal_vs_baseline": {
+    "addr_exact_name_sim_095": {
+      "added_true_links": 230,
+      "added_false_links": 0,
+      "added_links": 230
+    },
+    "addr_exact_name_sim_090": {
+      "added_true_links": 728,
+      "added_false_links": 4,
+      "added_links": 732
+    },
+    "name_exact_addr_overlap_080": {
+      "added_true_links": 2493,
+      "added_false_links": 2,
+      "added_links": 2495
+    },
+    "name_exact_addr_overlap_060": {
+      "added_true_links": 4026,
+      "added_false_links": 18,
+      "added_links": 4044
+    },
+    "name_exact_addr_overlap_040": {
+      "added_true_links": 4538,
+      "added_false_links": 292,
+      "added_links": 4830
+    }
+  },
+  "baseline_error_groups": {
+    "false_positive_links": {
+      "other": 325
+    },
+    "false_negative_links": {
+      "typo_like_name": 13927,
+      "name_variation_same_address": 3092,
+      "other_or_candidate_miss": 7575,
+      "name_order_or_punctuation": 1744,
+      "address_variation_same_name": 4615,
+      "missing_target_address": 1382
+    },
+    "examples": {
+      "typo_like_name": [
+        {
+          "s1": "S1-100369959",
+          "target": "S3-723094177",
+          "s1_name": "Coastal Service Pvt Ltd",
+          "target_name": "Coastal Service Pvt",
+          "s1_address": "7/3, Ground, Chandrodaya, Swastik Park, Chembur, Mumbai, Maharashtra",
+          "target_address": "7/3/6, Ground, Chandrodaya, Swastik Park, Chembur, Mumbai, महाराष्ट्र"
+        },
+        {
+          "s1": "S1-100369959",
+          "target": "S3-71242591",
+          "s1_name": "Coastal Service Pvt Ltd",
+          "target_name": "Coastal Service Pvt Limited",
+          "s1_address": "7/3, Ground, Chandrodaya, Swastik Park, Chembur, Mumbai, Maharashtra",
+          "target_address": "7/3/6, Mumbai, MH"
+        },
+        {
+          "s1": "S1-100369959",
+          "target": "S3-397417822",
+          "s1_name": "Coastal Service Pvt Ltd",
+          "target_name": "Coastal Service Pvt",
+          "s1_address": "7/3, Ground, Chandrodaya, Swastik Park, Chembur, Mumbai, Maharashtra",
+          "target_address": "7/3/6, Mumbai, महाराष्ट्र"
+        },
+        {
+          "s1": "S1-101258268",
+          "target": "S3-558455920",
+          "s1_name": "Modern Unique Producer Private Limited",
+          "target_name": "Modern Unique Producer Private",
+          "s1_address": "P.No.66, Adinath Nagar, Tonk, Rajasthan",
+          "target_address": "P.no.66, Adinath Nagar, Tonk, RJ"
+        },
+        {
+          "s1": "S1-101509005",
+          "target": "S3-690965201",
+          "s1_name": "United Healthcare Private Limited",
+          "target_name": "United Healthcare Private Ltd",
+          "s1_address": "Bengaluru, Karnataka, #B800, Bangalore, 2Nd Floor, Shankarnag Road Domlur 2Nd Stage",
+          "target_address": "#B800, 2Nd Floor, Shankarnag Road Domlur 2Nd Stage, Bengaluru, Bangalore, KA"
+        },
+        {
+          "s1": "S1-101509005",
+          "target": "S3-156368712",
+          "s1_name": "United Healthcare Private Limited",
+          "target_name": "Zetaxylo F/K/A United Healthcare Private Limited",
+          "s1_address": "Bengaluru, Karnataka, #B800, Bangalore, 2Nd Floor, Shankarnag Road Domlur 2Nd Stage",
+          "target_address": "2Nd Floor, Shankarnag Road Domlur 2Nd Stage, Bengaluru, Bangalore, Karnataka, #B800"
+        },
+        {
+          "s1": "S1-101509005",
+          "target": "S2-808488723",
+          "s1_name": "United Healthcare Private Limited",
+          "target_name": "UNITED HEALTHCARE PRIVATE - 8622686242",
+          "s1_address": "Bengaluru, Karnataka, #B800, Bangalore, 2Nd Floor, Shankarnag Road Domlur 2Nd Stage",
+          "target_address": "#B800, 2ND FLOOR, SHANKARNAG ROAD DOMLUR 2ND STAGE, BENGALURU, ಕರ್ನಾಟಕ"
+        },
+        {
+          "s1": "S1-101586744",
+          "target": "S3-444453961",
+          "s1_name": "Surya Finance Private Limited",
+          "target_name": "Surya Fínance Private Límited",
+          "s1_address": "27, (Ground Floor), Cinewonder Mall, Kapurbawdi, Ghodbunder Road, Thane (West, ), Mumbai, Maharashtra",
+          "target_address": "MH, ), Mumbai, Door No 634 27, (Ground Floor), Cinewonder Mall, Kapurbawdi, Ghodbunder Road, Thane (West"
+        }
+      ],
+      "name_variation_same_address": [
+        {
+          "s1": "S1-100369959",
+          "target": "S2-69645697",
+          "s1_name": "Coastal Service Pvt Ltd",
+          "target_name": "Coastal Sdeivie Pvt Ltd",
+          "s1_address": "7/3, Ground, Chandrodaya, Swastik Park, Chembur, Mumbai, Maharashtra",
+          "target_address": "7/3, GROUND, CHANDRODAYA, SWASTIK PARK, CHEMBUR, MUMBAI, Maharashtra"
+        },
+        {
+          "s1": "S1-100369959",
+          "target": "S2-390898127",
+          "s1_name": "Coastal Service Pvt Ltd",
+          "target_name": "Veraquo",
+          "s1_address": "7/3, Ground, Chandrodaya, Swastik Park, Chembur, Mumbai, Maharashtra",
+          "target_address": "7/3, GROUND, CHANDRODAYA, SWASTIK PARK, CHEMBUR, MUMBAI, Maharashtra"
+        },
+        {
+          "s1": "S1-101320411",
+          "target": "S3-127198424",
+          "s1_name": "Creative Agro Private Limited",
+          "target_name": "Lumbrix+",
+          "s1_address": "Plot No. 2196, Bjb Nagar, Near Baragarh Hat, Bhubaneswar, Khordha, Orissa",
+          "target_address": "Plot No. 2196, Bjb Nagar, Near Baragarh Hat, Bhubaneswar, Khordha, Orissa"
+        },
+        {
+          "s1": "S1-103020965",
+          "target": "S2-807343751",
+          "s1_name": "Avalon Surgical Care",
+          "target_name": "Avalon Surgical Care Company",
+          "s1_address": "Shop-03, Gigav Park, Vi-1 Opp-Uttamnagar, S.S Nr Ramnagar, Nikol, Ahmedabad, Gujarat",
+          "target_address": "SHOP-03, GIGAV PARK, VI-1 OPP-UTTAMNAGAR, S.S NR RAMNAGAR, NIKOL, AHMEDABAD, Gujarat"
+        },
+        {
+          "s1": "S1-104046627",
+          "target": "S3-237117442",
+          "s1_name": "NC Footwear Limited",
+          "target_name": "Xylolyra",
+          "s1_address": "A-17, Shardhapuri, Phase Ii, Kankar Khera, Mt Cantt., Meerut, Uttar Pradesh",
+          "target_address": "A-17, Shardhapuri, Phase Ii, Kankar Khera, Mt Cantt., Meerut, Uttar Pradesh"
+        },
+        {
+          "s1": "S1-104562522",
+          "target": "S3-720219809",
+          "s1_name": "Prime Tech Impex Private Limited",
+          "target_name": "Viozeta Co",
+          "s1_address": "Plot No. 381, Saheb Nagar, Kalan, Bn Reddy Nagar, Hayathnagar, Hyderabad, Telangana",
+          "target_address": "Plot No. 381, Saheb Nagar, Kalan, Bn Reddy Nagar, Hayathnagar, Hyderabad, Telangana"
+        },
+        {
+          "s1": "S1-105634076",
+          "target": "S3-174149077",
+          "s1_name": "Apical Gymkhana Pvt Ltd",
+          "target_name": "Apical",
+          "s1_address": "C/O Anil Nemani, Vinayak Shree Nri City Township E-55 Nri Villas, Mainawati Marg, Azad Na, Gar, Kanpur, Uttar Pradesh",
+          "target_address": "C/O Anil Nemani, Vinayak Shree Nri City Township E-55 Nri Villas, Mainawati Marg, Azad Na, Gar, Kanpur, Uttar Pradesh"
+        },
+        {
+          "s1": "S1-106095084",
+          "target": "S2-299371841",
+          "s1_name": "Yuktha Advertising Private Limited",
+          "target_name": "Yuktha Amdvretisig Private Limited",
+          "s1_address": "8.3.1102/3, 3/1/402, Flat No. 402, Plot No. 134, Srinivasam Apartments, Srinagar Colony, Hyderabad, Telangana",
+          "target_address": "8.3.1102/3, 3/1/402, FLAT NO. 402, PLOT NO. 134, SRINIVASAM APARTMENTS, SRINAGAR COLONY, HYDERABAD, Telangana"
+        }
+      ],
+      "other_or_candidate_miss": [
+        {
+          "s1": "S1-101258268",
+          "target": "S3-814537926",
+          "s1_name": "Modern Unique Producer Private Limited",
+          "target_name": "मॉडर्न यूनिक प्रोड्यूसर प्राइवेट लिमिटेड",
+          "s1_address": "P.No.66, Adinath Nagar, Tonk, Rajasthan",
+          "target_address": "Adinath Nagar, RJ, Tonk, P.no.66"
+        },
+        {
+          "s1": "S1-101258268",
+          "target": "S2-738687532",
+          "s1_name": "Modern Unique Producer Private Limited",
+          "target_name": "मॉडर्न यूनिक प्रोड्यूसर प्राइवेट लिमिटेड",
+          "s1_address": "P.No.66, Adinath Nagar, Tonk, Rajasthan",
+          "target_address": "P.NO.##66, TONK, MALPURA, Rajasthan"
+        },
+        {
+          "s1": "S1-101320411",
+          "target": "S2-711261342",
+          "s1_name": "Creative Agro Private Limited",
+          "target_name": "କ୍ରିଏଟିଭ୍ ଆଗ୍ରୋ ପ୍ରାଇଭେଟ୍ ଲିମିଟେଡ୍",
+          "s1_address": "Plot No. 2196, Bjb Nagar, Near Baragarh Hat, Bhubaneswar, Khordha, Orissa",
+          "target_address": "DOOR NO 2196, CUTTACK, KHORDHA, ଓଡ଼ିଶା"
+        },
+        {
+          "s1": "S1-101360413",
+          "target": "S3-577479273",
+          "s1_name": "New Developers Private Limited",
+          "target_name": "न्यू डेवलपर्स प्राइवेट लिमिटेड",
+          "s1_address": "Pune, Maharashtra, C/O. Jayashree Ramdas Tonde, S.No.36/1 Pushkraj, Yashwant Nagar, Kharadi, Pune",
+          "target_address": "C/o. Jayashree Ramdas Tonde, Ahmednagar, MH"
+        },
+        {
+          "s1": "S1-101360413",
+          "target": "S2-74751768",
+          "s1_name": "New Developers Private Limited",
+          "target_name": "न्यू डेवलपर्स प्राइवेट लिमिटेड",
+          "s1_address": "Pune, Maharashtra, C/O. Jayashree Ramdas Tonde, S.No.36/1 Pushkraj, Yashwant Nagar, Kharadi, Pune",
+          "target_address": "C/O. JAYASHREE RMDAS TONDE, S.NO.36/1 PUSHKRAJ, YASHWANT NAGAR, KHARADI, PUNE, URALI KANCHAN, Maharashtra"
+        },
+        {
+          "s1": "S1-101360413",
+          "target": "S3-31132108",
+          "s1_name": "New Developers Private Limited",
+          "target_name": "न्यू डेवलपर्स प्राइवेट लिमिटेड",
+          "s1_address": "Pune, Maharashtra, C/O. Jayashree Ramdas Tonde, S.No.36/1 Pushkraj, Yashwant Nagar, Kharadi, Pune",
+          "target_address": "C/o. Jayashree Ramdas Tonde, Pune, Kalyani Nagar, MH"
+        },
+        {
+          "s1": "S1-101360413",
+          "target": "S2-51060051",
+          "s1_name": "New Developers Private Limited",
+          "target_name": "न्यू डेवलपर्स प्राइवेट लिमिटेड",
+          "s1_address": "Pune, Maharashtra, C/O. Jayashree Ramdas Tonde, S.No.36/1 Pushkraj, Yashwant Nagar, Kharadi, Pune",
+          "target_address": "C/O. JAYASHREE RAMDAS TONDE, S.NO.36/1 PUSHKRAJ, YASHWANT NAGAR, KHARADI, PUNE, URALI KANCHAN, Maharashtra"
+        },
+        {
+          "s1": "S1-101509005",
+          "target": "S3-257156425",
+          "s1_name": "United Healthcare Private Limited",
+          "target_name": "Sri healthcareprivate.com",
+          "s1_address": "Bengaluru, Karnataka, #B800, Bangalore, 2Nd Floor, Shankarnag Road Domlur 2Nd Stage",
+          "target_address": "#B800, 2Nd Floor, Shankarnag Road Domlur 2Nd Stage, Bengaluru, Bangalore, KA"
+        }
+      ],
+      "name_order_or_punctuation": [
+        {
+          "s1": "S1-101258268",
+          "target": "S3-898801028",
+          "s1_name": "Modern Unique Producer Private Limited",
+          "target_name": "private modern unique producer limited",
+          "s1_address": "P.No.66, Adinath Nagar, Tonk, Rajasthan",
+          "target_address": "P.no.66, RJ, Adinath Nagar, Tonk"
+        },
+        {
+          "s1": "S1-104562522",
+          "target": "S3-122743685",
+          "s1_name": "Prime Tech Impex Private Limited",
+          "target_name": "Private Prime Tech Impex Limited",
+          "s1_address": "Plot No. 381, Saheb Nagar, Kalan, Bn Reddy Nagar, Hayathnagar, Hyderabad, Telangana",
+          "target_address": "తెలంగాణ, Hayathnagar, Hyderabad, No 381"
+        },
+        {
+          "s1": "S1-105634076",
+          "target": "S2-546605499",
+          "s1_name": "Apical Gymkhana Pvt Ltd",
+          "target_name": "APICAL PVT GYMKHANA  LTD",
+          "s1_address": "C/O Anil Nemani, Vinayak Shree Nri City Township E-55 Nri Villas, Mainawati Marg, Azad Na, Gar, Kanpur, Uttar Pradesh",
+          "target_address": "C/O ANIL NEMANI, VINAYAK SHREE NRI CITY TOWNSHIP E-1-55 NRI VILLAS, MAINAWATI MARG, AZAD NA, GAR, KANPUR, Uttar Pradesh"
+        },
+        {
+          "s1": "S1-107025023",
+          "target": "S2-470712758",
+          "s1_name": "Realtech Four Pvt. Ltd.",
+          "target_name": "Realtech Ltd. Pvt. Four",
+          "s1_address": "Plot No -32 Bhauma Nagar, Orissa, Bhubaneswar, Khordha",
+          "target_address": "PLOT NO -32 BHAUMA NAGAR, BHUBANESWAR, Odisha"
+        },
+        {
+          "s1": "S1-107790311",
+          "target": "S2-19629022",
+          "s1_name": "Techno Welfare Society",
+          "target_name": "TECHNO  SOCIETY WELFARE",
+          "s1_address": "Maharashtra, Buldana, 83 Plot No-7 Tq, Sunderkhed G. No-82, Buldhana",
+          "target_address": "SUNDERKHED G. NO-82, 83 PLOT NO-7 TQ, BULDANA, Maharashtra"
+        },
+        {
+          "s1": "S1-109893512",
+          "target": "S2-657160390",
+          "s1_name": "True & Sons Pvt Ltd",
+          "target_name": "True Ltd  Sons Pvt &",
+          "s1_address": "Andhra Pradesh, Gutur, Jai Krishna Bhavan, 1St Floor, 16/3, Arundelpet, D. No. 6-16-5, Guntur",
+          "target_address": "6-16-5 , JAI KRISHNA BHAVAN, 1ST FLOOR, 16/3, ARUNDELPET, GUTUR, Andhra Pradesh"
+        },
+        {
+          "s1": "S1-110595753",
+          "target": "S2-608727919",
+          "s1_name": "Headstrong Care Limited",
+          "target_name": "HEADSTRONG CARE CARE LIMITED",
+          "s1_address": "Delhi, Guru Ravidas Marg, South Delhi, New Delhi, G-70 B 2Nd Floor G Block",
+          "target_address": "G-70  B 2ND FLOOR G BLOCK, GURU RAVIDAS MARG, NEW DELHI, Delhi"
+        },
+        {
+          "s1": "S1-110595753",
+          "target": "S2-623064622",
+          "s1_name": "Headstrong Care Limited",
+          "target_name": "LIMITED HEADSTRONG CARE",
+          "s1_address": "Delhi, Guru Ravidas Marg, South Delhi, New Delhi, G-70 B 2Nd Floor G Block",
+          "target_address": "G-70  B 2ND FLOOR G BLOCK, GURU RAVIDAS MARG, NEW DELHI, NOIDA, दिल्ली"
+        }
+      ],
+      "address_variation_same_name": [
+        {
+          "s1": "S1-101612983",
+          "target": "S3-322997195",
+          "s1_name": "Delhi Civil Pvt Ltd",
+          "target_name": "delhi civil pvt ltd",
+          "s1_address": "C-57 Preet Vihar 2Nd Floor, Delhi, East Delhi, Delhi",
+          "target_address": "C-57 Preet Vihar 2Nd Floor, Delhi, East Delhi, DL"
+        },
+        {
+          "s1": "S1-101612983",
+          "target": "S2-78373462",
+          "s1_name": "Delhi Civil Pvt Ltd",
+          "target_name": "delhi civil pvt ltd",
+          "s1_address": "C-57 Preet Vihar 2Nd Floor, Delhi, East Delhi, Delhi",
+          "target_address": "C-57 PREET VIHAR 2ND FLOOR, EAST DELHI, Delhi"
+        },
+        {
+          "s1": "S1-101846341",
+          "target": "S3-541312005",
+          "s1_name": "Shiv International Private Limited",
+          "target_name": "shiv international private limited",
+          "s1_address": "A-404 Sumati Avenue Appartment Jamnagar Road, Rajkot, Gujarat",
+          "target_address": "A-##404 Sumati Avenue Appartment Jamnagar Road, N/A, Rajkot, GJ"
+        },
+        {
+          "s1": "S1-102555176",
+          "target": "S2-69920937",
+          "s1_name": "TTX Services",
+          "target_name": "Ttx Services",
+          "s1_address": "Khasbati North Road Po- Halisahar, Ps Hazinagar, Halisahar, Parganas North, West Bengal",
+          "target_address": "পশ্চিমবঙ্গ, KHASBATI NORTH ROAD PO- HALISAHAR, PS HAZINAGAR, HALISAHAR"
+        },
+        {
+          "s1": "S1-102555176",
+          "target": "S3-957019928",
+          "s1_name": "TTX Services",
+          "target_name": "TTX  Services",
+          "s1_address": "Khasbati North Road Po- Halisahar, Ps Hazinagar, Halisahar, Parganas North, West Bengal",
+          "target_address": "Khasbati North Road Po- Halisahar, Parganas North, Halisahar, WB"
+        },
+        {
+          "s1": "S1-102555176",
+          "target": "S2-812416250",
+          "s1_name": "TTX Services",
+          "target_name": "Ttx Services",
+          "s1_address": "Khasbati North Road Po- Halisahar, Ps Hazinagar, Halisahar, Parganas North, West Bengal",
+          "target_address": "KHASBATI NORTH ROAD PO- HALISAHAR, PS HAZINAGAR, HALISAHAR, West Bengal"
+        },
+        {
+          "s1": "S1-106471813",
+          "target": "S3-774995843",
+          "s1_name": "Laxmi Impex Limited",
+          "target_name": "Laxmi  Impex Limited",
+          "s1_address": "J603, Divine Meadows, Sector - 108, Noida, Noida, Gautam Buddha Nagar, Uttar Pradesh",
+          "target_address": "J0603, Gautam Buddha Nagar, UP"
+        },
+        {
+          "s1": "S1-107182783",
+          "target": "S2-833339915",
+          "s1_name": "Brzee Telecommunications Pvt. Ltd.",
+          "target_name": "Brzee Telecommunications Pvt. Ltd.",
+          "s1_address": "1-11-252/1A To 1D, Alladin Street, Hyderabad, Telangana, Begumpet",
+          "target_address": "DOOR NO 1-11-252/1A TO 1D, ALLADIN STREET, BEGUMPET, Telangana"
+        }
+      ],
+      "missing_target_address": [
+        {
+          "s1": "S1-103819846",
+          "target": "S3-275332202",
+          "s1_name": "Creative Investment Private Limited",
+          "target_name": "Creative Invetmet Private Limited",
+          "s1_address": "30 Venetian Villas Opp Anandniketan School Shilaj Daskroi, Ahmedabad, Gujarat",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-104701649",
+          "target": "S2-750771497",
+          "s1_name": "Rohan Pharmaceuticals Pvt Ltd",
+          "target_name": "Rohan Pvt Ltd Services",
+          "s1_address": "Gujarat, Pardi, Valsad, 2Nd Floor, Govinda, Silvassa-Vapi Road, Gidc Vapi, Shop No. 233",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-104701649",
+          "target": "S3-53246530",
+          "s1_name": "Rohan Pharmaceuticals Pvt Ltd",
+          "target_name": "Rohan Pvt Ltd Center",
+          "s1_address": "Gujarat, Pardi, Valsad, 2Nd Floor, Govinda, Silvassa-Vapi Road, Gidc Vapi, Shop No. 233",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-106471813",
+          "target": "S3-626208191",
+          "s1_name": "Laxmi Impex Limited",
+          "target_name": "Laxmi Impex Limited | www.laxmiimpe.com",
+          "s1_address": "J603, Divine Meadows, Sector - 108, Noida, Noida, Gautam Buddha Nagar, Uttar Pradesh",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-107025023",
+          "target": "S2-985989244",
+          "s1_name": "Realtech Four Pvt. Ltd.",
+          "target_name": "REALTECH  FOUR PVT.",
+          "s1_address": "Plot No -32 Bhauma Nagar, Orissa, Bhubaneswar, Khordha",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-107182783",
+          "target": "S2-219118063",
+          "s1_name": "Brzee Telecommunications Pvt. Ltd.",
+          "target_name": "Brzee Télecommunications Pvt. (Ltd)",
+          "s1_address": "1-11-252/1A To 1D, Alladin Street, Hyderabad, Telangana, Begumpet",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-107790311",
+          "target": "S3-838684915",
+          "s1_name": "Techno Welfare Society",
+          "target_name": "Dr Techno Wélfare Society",
+          "s1_address": "Maharashtra, Buldana, 83 Plot No-7 Tq, Sunderkhed G. No-82, Buldhana",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-109756031",
+          "target": "S3-263192742",
+          "s1_name": "Vijay Foods Pvt Ltd",
+          "target_name": "Vijay Frbgos Frbgos Pvt Ltd",
+          "s1_address": "247, Sector No. 3, Hiran Magri, Udaipur, Rajasthan",
+          "target_address": ""
+        }
+      ],
+      "FP_other": [
+        {
+          "s1": "S1-109893512",
+          "target": "S3-557542497",
+          "s1_name": "True & Sons Pvt Ltd",
+          "target_name": "TRUE & SONS PVT LTD",
+          "s1_address": "Andhra Pradesh, Gutur, Jai Krishna Bhavan, 1St Floor, 16/3, Arundelpet, D. No. 6-16-5, Guntur",
+          "target_address": "H No. 728, Gali No.6, Shiv Colony, Devru Road, North 24 Parganas, Sonipat, HR"
+        },
+        {
+          "s1": "S1-119276563",
+          "target": "S2-415527184",
+          "s1_name": "Eagle Medical Centre",
+          "target_name": "Eagle Medical [(Centre)]",
+          "s1_address": "H.No. 180, Kalagarh Road, Dhampur, Bijnor, Bijnore, Uttar Pradesh",
+          "target_address": "BLOCK F-905 C-169 FLAT NO-1 IIND FLOOR MADANPUR KHADAR EXTENSION, SARITA VIHAR, NEW DELHI, दिल्ली"
+        },
+        {
+          "s1": "S1-122888755",
+          "target": "S3-393054688",
+          "s1_name": "East Consultants LLP",
+          "target_name": "East Consultants LLP",
+          "s1_address": "H. No. 186, At Post - Shiroli, Tal- Khed, District-Pune, Pune, Maharashtra",
+          "target_address": "H.no.08-3-25/a/123 Yousufguda, Hyderabad, తెలంగాణ"
+        },
+        {
+          "s1": "S1-126818177",
+          "target": "S3-625232396",
+          "s1_name": "Sps Works (India) Pvt Ltd",
+          "target_name": "SPS WORKS (INDIA) PVT LTD",
+          "s1_address": "B- 906, Sundew Swastik Park Village Rd, Bhandup, Mumbai, Maharashtra",
+          "target_address": "Rz-130/a, Street No. 11/12, Hastsal Road, Gurgaon, New Delhi, DL"
+        },
+        {
+          "s1": "S1-145229391",
+          "target": "S2-650582191",
+          "s1_name": "De Watertech Private Limited",
+          "target_name": "DE WATERTECH PRIVATE LIMITED",
+          "s1_address": "546/3/319, Lucknow, Akbar Nagar, Faizabad Road, Mahanagar, Uttar Pradesh, Lucknow",
+          "target_address": "DOOR NO 122 , KANERI, KHOKHA COMPOUND, BHIWANDI, Maharashtra"
+        },
+        {
+          "s1": "S1-150518051",
+          "target": "S2-150110389",
+          "s1_name": "Sunny Nursing Ltd",
+          "target_name": "SUNNY NURSING LTD.",
+          "s1_address": "Flat No 502, 5Th Floor Ru, New Paccha Peth Solapur, Solapur North, Solapur, Maharashtra",
+          "target_address": "HN 487 KHEWAT NO 622 OR 687, GALI NO-3, BILASPUR CHOWK, BHORAKALAN, Haryana"
+        },
+        {
+          "s1": "S1-155756913",
+          "target": "S2-545021231",
+          "s1_name": "Radiant Consultants Private Limited",
+          "target_name": "Radiant Consultants Private  Limited",
+          "s1_address": "08, 1St Floor, 4Th Cross, 1St Stage, 6Th Phase, Mahaganapathi Nagar, Rajaji N, Agar, Bangalore, Karnataka",
+          "target_address": ""
+        },
+        {
+          "s1": "S1-173403114",
+          "target": "S3-816516522",
+          "s1_name": "East Agro Limited",
+          "target_name": "East Agro (Limited)",
+          "s1_address": "20/1 Maharshi Debendra Road, 2Nd Floor, Room Number 13A, Kolkata, Kolkata, Kolkata, Howrah, West Bengal",
+          "target_address": "Bangalore, ಕರ್ನಾಟಕ, Bangalore South, Hosur Road, Hn 784/1 270/A"
+        }
+      ]
+    }
+  },
+  "runtime": {
+    "total_seconds": 284.317,
+    "target_scan_seconds": 246.677,
+    "target_rows_streamed": 10320219,
+    "final_prediction_ids_by_mode": {
+      "baseline": 2955,
+      "addr_exact_name_sim_095": 3185,
+      "addr_exact_name_sim_090": 3687,
+      "name_exact_addr_overlap_080": 5450,
+      "name_exact_addr_overlap_060": 6999,
+      "name_exact_addr_overlap_040": 7785
+    }
+  },
+  "limitations": [
+    "Single deterministic holdout sample; rule thresholds were prespecified, but sampling uncertainty remains.",
+    "Training labels can contain noise; string-based categories are diagnostic proxies, not adjudication.",
+    "Country validation covers only countries present in supplied training data."
+  ]
+}

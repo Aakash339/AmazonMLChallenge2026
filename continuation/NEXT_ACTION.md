@@ -1,11 +1,7 @@
-# Next Actions — Submission #2
+# Next Action — Submission #2
 
-1. Reproduce the exact `experiments/stage5/submission1_fast_baseline/fast_baseline.py` rules on held-out training data.
-2. Record validation F0.5, precision, recall, false positives, and false negatives.
-3. Diagnose multilingual, missing-address, and ambiguous-key failures.
-4. Design computationally feasible higher-recall retrieval without scoring 12.6 billion candidates or materializing hundreds of GB.
-5. Develop and validate a stronger scorer on held-out data.
-6. Generate and validate Submission #2 outputs.
-7. Submit #2 to the leaderboard and record the result.
+1. Review `experiments/stage5_submission2_combined075/Amazon_ML_Challenge_2026_submission2_combined075.zip` and compare with preserved .40/.80 versions.
+2. If the approach is acceptable, upload its packaged `output/matching_results.tsv` to the challenge portal.
+3. Record the portal score and submission count in `PROJECT_STATE.md`, `EXPERIMENT_LOG.md`, and `SUBMISSION_STATUS.md`.
 
-Do not silently change frozen Stage 4, modify `student_resource/`, use external data/APIs, install unnecessary packages, or overwrite historical results. Preserve Submission #1 artifacts.
+The outputs have already passed the supplied validator with `--check-ids`. Do not claim a test/leaderboard improvement before a portal score is returned. Preserve Submission #1, do not change Stage 4, and use only supplied challenge data.
